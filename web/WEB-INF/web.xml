@@ -24,6 +24,10 @@
         <servlet-name>EditInfo</servlet-name>
         <servlet-class>controllers.EditInfoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Detail</servlet-name>
+        <servlet-class>controllers.DetailProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/product-list</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>EditInfo</servlet-name>
         <url-pattern>/account/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Detail</servlet-name>
+        <url-pattern>/detail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

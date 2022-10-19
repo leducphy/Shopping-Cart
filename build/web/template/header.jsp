@@ -22,6 +22,15 @@
                     <a href="<%=path%>/category-list"><img src="<%=path%>/img/logo.png" style="width: 100px; height: 100px;margin: 10px;"/></a>
                 </div>
 
+                <nav class="navbar navbar-light timkiem">
+                    <div class="container-fluid">
+                        <form class="d-flex" style="width: 100%;">
+                            <input class="form-control me-2" type="search" placeholder="Search Product by name" aria-label="Search">
+                            <button class="btn btn-outline-success search-btn" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+
                 <div id="banner"  >
                     <ul style="margin-bottom: 0">
                         <li><a href="<%=path%>/cart.jsp" class="nav-link siennaa" >Cart: 100$</a></li>

@@ -1,46 +1,75 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="DAL.*" %>
 <%@page import="controllers.*" %>
 <%@page import="models.*" %>
 <%@page import="java.util.ArrayList" %>
 <%@include file="./template/header.jsp" %>
 <div id="content">
-    <%
-        ArrayList<Category> categoryList = new CategoryDAO().getCategory();
-        String productName = request.getParameter("product-name"); 
-        int categoryID = Integer.parseInt(request.getParameter("category-id"));
-        String productID = request.getParameter("model");
-        String categoryName = "";
-        for(Category item: categoryList){
-            if(item.getCategoryID() == categoryID){
-            categoryName = item.getCategoryName();
-        }
-        }
-    %>
+    <c:set var = "p" scope = "application" value = "${product}"></c:set>
     <div id="content-detail">
         <div id="content-title">
-            <a href="index.jsp">Home</a> >
-            <a href="product-list?category-id=<%=categoryID%>"><%=categoryName%></a> >
-            Model: <%=productID%>
+            <a href="<%=path%>/category-list">Home</a> >
+            <a href="product-list?category-id=${categoryID}">${catName}</a> >  
+            <a href="#"> Model: ${pid}</a> 
+
         </div>
         <div id="product">
             <div id="product-name">
-                <h2><%=productName%></h2>
+
                 <div id="product-detail">
                     <div id="product-detail-left">
                         <div id="product-img">
-                            <img src="img/4.jpg"/>
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="<%=path%>/img/6.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="<%=path%>/img/7.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="<%=path%>/img/8.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
                         </div>
                         <div id="product-img-items">
                             <div><a href="#"><img src="img/6.jpg"/></a></div>
                             <div><a href="#"><img src="img/7.jpg"/></a></div>
                             <div><a href="#"><img src="img/8.jpg"/></a></div>
                             <div><a href="#"><img src="img/9.jpg"/></a></div>
+
                         </div>
                     </div>
                     <div id="product-detail-right">
                         <div id="product-detail-right-content">
-                            <div id="product-price">$ 1000</div>
-                            <div id="product-status">In stock</div>
+                            <h2 style="color: sienna;
+                                font-style: oblique;">${pname}</h2>
+                            <div id="product-price">$ ${pprice}</div>
+                            <div id="product-status">
+                                <c:choose>
+                                    <c:when test="${pstatus > 0}">
+                                        <p style=" ">In Stock</p>
+                                    </c:when>    
+                                    <c:otherwise>
+                                        <p style="color: gray; ">Out Of Stock</p>
+                                    </c:otherwise>
+                                </c:choose>
+                                        
+                            </div>
                             <div id="product-detail-buttons">
                                 <div id="product-detail-button">
                                     <input type="button" value="BY NOW">

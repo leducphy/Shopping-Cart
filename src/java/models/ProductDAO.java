@@ -40,6 +40,40 @@ public class ProductDAO extends DBContext {
         return products;
     }
 
+    public Product getProductByID(int ID) {
+        Product product = null;
+        try {
+            String sql = "SELECT p.ProductID,\n"
+                    + "       p.ProductName,\n"
+                    + "       p.CategoryID,\n"
+                    + "       p.QuantityPerUnit,\n"
+                    + "       p.UnitPrice,\n"
+                    + "       p.UnitsInStock,\n"
+                    + "       p.UnitsOnOrder,\n"
+                    + "       p.ReorderLevel,\n"
+                    + "       p.Discontinued 	\n"
+                    + "FROM products p\n"
+                    + "WHERE p.ProductID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int ProductID = rs.getInt("ProductID");
+                String ProductName = rs.getString("ProductName");
+                int CategoryID = rs.getInt("CategoryID");
+                String QuantityPerUnit = rs.getString("QuantityPerUnit");
+                double UnitPrice = rs.getDouble("UnitPrice");
+                int UnitsInStock = rs.getInt("UnitsInStock");
+                int UnitsOnOrder = rs.getInt("UnitsOnOrder");
+                int ReorderLevel = rs.getInt("ReorderLevel");
+                boolean Discontinued = rs.getBoolean("Discontinued");
+                product = new Product(ProductID, ProductName, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued);
+            }
+        } catch (SQLException e) {
+        }
+        return product;
+    }
+
     public ArrayList<Product> getHotProducts() {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -153,7 +187,85 @@ public class ProductDAO extends DBContext {
                 p.setDiscontinued(rs.getBoolean("Discontinued"));
                 products.add(p);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductsByIDAndPage(int page, int elements, int id) {
+        ArrayList<Product> products = new ArrayList<>();
+        int start = page * elements - elements;
+        try {
+            String sql = "SELECT p.ProductID,\n"
+                    + "       p.ProductName,\n"
+                    + "       p.CategoryID,\n"
+                    + "       p.QuantityPerUnit,\n"
+                    + "       p.UnitPrice,\n"
+                    + "       p.UnitsInStock,\n"
+                    + "       p.UnitsOnOrder,\n"
+                    + "       p.ReorderLevel,\n"
+                    + "       p.Discontinued 	\n"
+                    + "FROM products p, dbo.Categories c\n"
+                    + "WHERE c.CategoryID = p.CategoryID\n"
+                    + "AND p.CategoryID = ?\n"
+                    + "\n"
+                    + "ORDER BY ProductID OFFSET ? \n"
+                    + "ROWS FETCH NEXT ? ROWS ONLY;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, start);
+            ps.setInt(3, elements);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                p.setQuantityPerUnit(rs.getString("QuantityPerUnit"));
+                p.setUnitPrice(rs.getDouble("UnitPrice"));
+                p.setUnitsInStock(rs.getInt("UnitsInStock"));
+                p.setUnitsOnOrder(rs.getInt("UnitsOnOrder"));
+                p.setReorderLevel(rs.getInt("ReorderLevel"));
+                p.setDiscontinued(rs.getBoolean("Discontinued"));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductsByCatID(int id) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT p.ProductID,\n"
+                    + "       p.ProductName,\n"
+                    + "       p.CategoryID,\n"
+                    + "       p.QuantityPerUnit,\n"
+                    + "       p.UnitPrice,\n"
+                    + "       p.UnitsInStock,\n"
+                    + "       p.UnitsOnOrder,\n"
+                    + "       p.ReorderLevel,\n"
+                    + "       p.Discontinued 	\n"
+                    + "FROM products p, dbo.Categories c\n"
+                    + "WHERE c.CategoryID = p.CategoryID\n"
+                    + "AND p.CategoryID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                p.setQuantityPerUnit(rs.getString("QuantityPerUnit"));
+                p.setUnitPrice(rs.getDouble("UnitPrice"));
+                p.setUnitsInStock(rs.getInt("UnitsInStock"));
+                p.setUnitsOnOrder(rs.getInt("UnitsOnOrder"));
+                p.setReorderLevel(rs.getInt("ReorderLevel"));
+                p.setDiscontinued(rs.getBoolean("Discontinued"));
+                products.add(p);
+            }
+        } catch (SQLException e) {
         }
         return products;
     }

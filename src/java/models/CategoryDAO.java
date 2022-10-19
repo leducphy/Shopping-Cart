@@ -34,10 +34,29 @@ public class CategoryDAO extends DBContext {
         }
         return list;
     }
-    public static void main(String[] args) {
-        ArrayList<Category> list = new CategoryDAO().getCategory();
-        for (Category category : list) {
-            System.out.println(category);
+    
+    public Category getCategoryByID(int id) {
+        Category cat = null;
+        try {
+            String sql = "SELECT * FROM dbo.Categories WHERE CategoryID = ?";
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int CategoryID = rs.getInt("CategoryID");
+                String CategoryName = rs.getString("CategoryName");
+                String Description = rs.getString("Description");
+                String Picture = rs.getString("Picture");
+                cat = new Category(CategoryID, CategoryName, Description, Picture);
+            }
+        } catch (SQLException e) {
         }
+        return cat;
     }
+//    public static void main(String[] args) {
+//        ArrayList<Category> list = new CategoryDAO().getCategory();
+//        for (Category category : list) {
+//            System.out.println(category);
+//        }
+//    }
 }

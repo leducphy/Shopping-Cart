@@ -55,19 +55,19 @@ public class ProductListController extends HttpServlet {
             req.getSession().setAttribute("newProduct", newProduct);
         }
         ProductDAO dao = new ProductDAO();
-        int elements = 20;
-        ArrayList<Product> products = dao.getProductsByPage(page, elements);
-        int numberOfPage = dao.getProducts().size() % elements == 0 ? dao.getProducts().size() / elements : dao.getProducts().size() / elements + 1;
+        int elements = 4;
+        ArrayList<Product> products = dao.getProductsByIDAndPage(page, elements, categoryID);
+        int numberOfPage = output.size() % elements == 0 ? output.size() / elements : output.size() / elements + 1;
         ArrayList<Category> categories = new CategoryDAO().getCategory();
         req.setAttribute("categories", categories);
         req.setAttribute("products", products);
         req.setAttribute("page", page);
         req.setAttribute("numberOfPage", numberOfPage);
         req.setAttribute("categoryList", categoryList);
-
+        req.setAttribute("categoryID", categoryID);
         req.setAttribute("cateDesc", categoryDescription);
         req.setAttribute("input-category-name", categoryName);
-        req.setAttribute("cateListByID", output);
+        req.setAttribute("cateListByID", products);
         
         req.getRequestDispatcher("category.jsp").forward(req, resp);
     }
