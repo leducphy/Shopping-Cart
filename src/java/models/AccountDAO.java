@@ -88,10 +88,10 @@ public class AccountDAO extends DBContext {
         return accounts;
     }
 
-    public static void main(String[] args) {
-        ArrayList<Account> list = new AccountDAO().getAccounts();
-        for (Account item : list) {
-            System.out.println(item.toString());
-        }
-    }
+//    public static void main(String[] args) {
+//        ArrayList<Account> list = new AccountDAO().getAccounts();
+//        for (Account item : list) {
+//            System.out.println(item.toString());
+//        }
+//    }
 }

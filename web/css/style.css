@@ -257,6 +257,13 @@
     padding:15px;
 }
 
+#content-title a{
+    text-decoration: none;
+    color: sienna;
+    font-size: 20px;
+    font-style: oblique;
+}
+
 #product{
     background-color: #fff;
     width: 100%;
@@ -313,6 +320,23 @@
 
 #product-detail-right{
     width: 60%;
+    margin: 40px;
+}
+
+.timkiem{
+    width: 100%;
+    align-items: unset;
+    margin-left: 100px;
+    bottom:0;
+}
+.search-btn:hover{
+    background-color: sienna!important;
+    color: white!important;
+}
+
+.search-btn{
+    color: #0d6efd!important;
+    border-color: sienna!important;
 }
 
 #product-detail-right-content{
@@ -416,7 +440,7 @@
     margin-bottom: 30px;
     border-bottom: 1px solid gainsboro;
     padding-bottom: 20px;
-    
+
 }
 
 
@@ -739,11 +763,11 @@
     margin-top: -30px;
 }
 
- #content-main-product{
+#content-main-product{
     width: 100%;
     border: 1px solid sandybrown;
     display: flex;
- }
+}
 
 .content-main-1{
     width: 50%;

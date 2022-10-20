@@ -36,7 +36,7 @@
                     </div>
                     <div class="profile-content-col">
                         <div>Email: <br/>
-                            <input type="button" style="width: 300px;" value="<%=cus.getEmail()%>"><br>
+                            <input type="text" style="width: 300px;" value="<%=cus.getEmail()%>" disabled><br>
                         </div>
                     </div>
                     <div>
