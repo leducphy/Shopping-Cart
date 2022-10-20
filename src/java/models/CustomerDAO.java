@@ -39,6 +39,30 @@ public class CustomerDAO extends DBContext {
         return cus;
     }
 
+    public Customers getCustomersByID(String ID) {
+        Customers cus = null;
+        try {
+            String sql = "Select * from Customers where CustomerId=?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String CustomerID = rs.getString("CustomerID");
+                String CompanyName = rs.getString("CompanyName");
+                String ContactName = rs.getString("ContactName");
+                String ContactTitle = rs.getString("ContactTitle");
+                String Address = rs.getString("Address");
+                String Role = rs.getString("Role");
+                String Email = rs.getString("Email");
+                cus = new Customers(CustomerID, CompanyName, ContactName, ContactTitle, Address, Role, Email);
+
+            }
+        } catch (SQLException e) {
+        }
+        return cus;
+    }
+
     public void updateProfile(String cusID, String CompanyName, String ContactName, String ContactTitle, String Address) {
         try {
             String sql = "UPDATE [dbo].[Customers]\n"
@@ -58,8 +82,8 @@ public class CustomerDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        Customers c = new CustomerDAO().getProfile(5);
-        System.out.println(c.toString());
-    }
+//    public static void main(String[] args) {
+//        Customers c = new CustomerDAO().getProfile(5);
+//        System.out.println(c.toString());
+//    }
 }

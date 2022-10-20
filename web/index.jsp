@@ -24,7 +24,7 @@
                     <a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}&model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}>&model=${p.getCategoryID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="" class="btn btn-primary buynow">Buy now</a></div>
+                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}" class="btn btn-primary buynow" >Buy now</a></div>
                 </div>
             </c:forEach>
 
