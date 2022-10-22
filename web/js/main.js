@@ -54,10 +54,4 @@ function showMess(id) {
 }
 
 
-       
-function buynow(id){
-    var option = confirm('Do you want to Add this product to CART : ' + id + ' ? ');
-    if (option === true) {
-        window.location.href = 'index.jsp';
-    }
-}       
+      

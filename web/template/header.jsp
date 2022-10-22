@@ -24,8 +24,8 @@
 
                 <nav class="navbar navbar-light timkiem">
                     <div class="container-fluid">
-                        <form class="d-flex" style="width: 100%;">
-                            <input class="form-control me-2" type="search" placeholder="Search Product by name" aria-label="Search">
+                        <form action="search" method="post" class="d-flex" style="width: 100%;">
+                            <input name="txtSearch" class="form-control me-2" type="search" placeholder="Search Product by name" aria-label="Search" value="${nameSearch}">
                             <button class="btn btn-outline-success search-btn" type="submit">Search</button>
                         </form>
                     </div>

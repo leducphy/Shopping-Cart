@@ -141,14 +141,6 @@ public class SignupController extends HttpServlet {
         return abc;
     }
 
-    private ArrayList<String> getString(String txt) {
-        StringTokenizer token = new StringTokenizer(txt);
-        ArrayList<String> txtFinal = new ArrayList<>();
-        String word = token.nextToken();
-        while (token.hasMoreTokens()) {
-            txtFinal.add(word + " ");
-        }
-        return txtFinal;
-    }
+
 
 }

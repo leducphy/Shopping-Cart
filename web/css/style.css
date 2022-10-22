@@ -397,6 +397,7 @@
     background-color: sienna;
     color: white!important;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .product .name a{
@@ -801,3 +802,27 @@
     width: 80px;
     height: 30px;
 }
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+     /*display: flex;*/
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .pagination a.active {
+    background-color: sienna;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+  }

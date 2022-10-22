@@ -32,6 +32,26 @@
         <servlet-name>CartControl</servlet-name>
         <servlet-class>controllers.CartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SeachServlet</servlet-name>
+        <servlet-class>controllers.SearchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageProduct</servlet-name>
+        <servlet-class>controllers.ProductManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAdmin</servlet-name>
+        <servlet-class>controllers.SearchProductAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>controllers.DeleteProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProduct</servlet-name>
+        <servlet-class>controllers.CreateProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/product-list</url-pattern>
@@ -63,6 +83,27 @@
     <servlet-mapping>
         <servlet-name>CartControl</servlet-name>
         <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeachServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageProduct</servlet-name>
+        <url-pattern>/ManageProduct</url-pattern>
+        <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAdmin</servlet-name>
+        <url-pattern>/SearchAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

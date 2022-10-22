@@ -15,7 +15,7 @@
 
                             <div class="cart-item-infor">
                                 <div class="cart-item-img">
-                                    <img src="img/1.jpg"/>
+                                    <img src="img/6.jpg"/>
                                 </div>
                                 <div class="cart-item-name">
                                     <a style="

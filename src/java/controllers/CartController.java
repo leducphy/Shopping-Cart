@@ -26,32 +26,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        Cart cart = null;
-//        Object obj = req.getSession().getAttribute("cart");
-//        if (obj != null) {
-//            cart = (Cart) obj;
-//        } else {
-//            cart = new Cart();
-//        }
-//
-//        String tid = req.getParameter("id");
-//        int id = Integer.parseInt(tid);
-//
-//        try {
-//            Product p = new ProductDAO().getProductByID(id);
-//            double price = p.getUnitPrice() * 0.1;
-//
-//            Item t = new Item(p, 1, price);
-//
-//            cart.addItem(t);
-//
-//            List<Item> list = cart.getItems();
-//            req.setAttribute("cart", cart);
-//
-//            req.getRequestDispatcher("cart.jsp").forward(req, resp);
-//        } catch (NumberFormatException e) {
-//        }
-        
+
         String idx = req.getParameter("id");
         int id = Integer.parseInt(idx);
 
@@ -88,7 +63,7 @@ public class CartController extends HttpServlet {
             req.getSession().setAttribute("size", list.size());
             req.getRequestDispatcher("cart.jsp").forward(req, resp);
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
         }
 
     }

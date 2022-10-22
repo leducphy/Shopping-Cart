@@ -53,10 +53,10 @@ public class CategoryDAO extends DBContext {
         }
         return cat;
     }
-//    public static void main(String[] args) {
-//        ArrayList<Category> list = new CategoryDAO().getCategory();
-//        for (Category category : list) {
-//            System.out.println(category);
-//        }
-//    }
+    public static void main(String[] args) {
+        ArrayList<Category> list = new CategoryDAO().getCategory();
+        for (Category category : list) {
+            System.out.println(category);
+        }
+    }
 }

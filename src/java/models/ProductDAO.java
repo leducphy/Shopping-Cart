@@ -270,10 +270,92 @@ public class ProductDAO extends DBContext {
         return products;
     }
 
-//    public static void main(String[] args) {
-//        ArrayList<Product> list = new ProductDAO().getHotProducts();
-//        for (Product item : list) {
-//            System.out.println(item.toString());
-//        }
-//    }
+    public ArrayList<Product> searchProductName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM dbo.Products WHERE ProductName LIKE '%" + name + "%'";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                p.setQuantityPerUnit(rs.getString("QuantityPerUnit"));
+                p.setUnitPrice(rs.getDouble("UnitPrice"));
+                p.setUnitsInStock(rs.getInt("UnitsInStock"));
+                p.setUnitsOnOrder(rs.getInt("UnitsOnOrder"));
+                p.setReorderLevel(rs.getInt("ReorderLevel"));
+                p.setDiscontinued(rs.getBoolean("Discontinued"));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return products;
+    }
+
+    public void DeleteProduct(int id) {
+        String sql = "DELETE FROM dbo.[Order Details] WHERE ProductID = ?\n"
+                + "DELETE FROM dbo.Products WHERE ProductID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int addProduct(Product p) {
+        int r = 0;
+        try {
+            String sql = "INSERT INTO dbo.Products\n"
+                    + "(\n"
+                    + "    ProductName,\n"
+                    + "    CategoryID,\n"
+                    + "    QuantityPerUnit,\n"
+                    + "    UnitPrice,\n"
+                    + "    UnitsInStock,\n"
+                    + "    UnitsOnOrder,\n"
+                    + "    ReorderLevel,\n"
+                    + "    Discontinued\n"
+                    + ")\n"
+                    + "VALUES\n"
+                    + "(   ?,  -- ProductName - nvarchar(40)\n"
+                    + "    ?,    -- CategoryID - int\n"
+                    + "    ?,  -- QuantityPerUnit - nvarchar(20)\n"
+                    + "    ?, -- UnitPrice - money\n"
+                    + "    ?,    -- UnitsInStock - smallint\n"
+                    + "    ?,    -- UnitsOnOrder - smallint\n"
+                    + "    ?,    -- ReorderLevel - smallint\n"
+                    + "    ?  -- Discontinued - bit\n"
+                    + "    )";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, p.getProductName());
+            ps.setInt(2, p.getCategoryID());
+            ps.setString(3, p.getQuantityPerUnit());
+            ps.setDouble(4, p.getUnitPrice());
+            ps.setInt(5, p.getUnitsInStock());
+            ps.setInt(6, p.getUnitsOnOrder());
+            ps.setInt(7, p.getReorderLevel());
+            ps.setBoolean(8, p.isDiscontinued());
+            r = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        if (r != 0 ) {
+            return 1;
+        } else {
+            return 0;
+        }
+       
+    }
+
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+         
+        int x = dao.addProduct(new Product(0, "iPhone 13", 9, "pcs", 1009, 2, 2, 2, false));
+        System.out.println(x);
+    }
 }

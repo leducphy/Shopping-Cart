@@ -17,7 +17,7 @@ public class Product {
     private int UnitsInStock;
     private int UnitsOnOrder;
     private int ReorderLevel;
-    private boolean Discontinued;
+    private  boolean Discontinued;
 
     public Product(int ProductID, String ProductName, int CategoryID, String QuantityPerUnit, double UnitPrice, int UnitsInStock, int UnitsOnOrder, int ReorderLevel, boolean Discontinued) {
         this.ProductID = ProductID;

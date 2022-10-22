@@ -27,7 +27,7 @@
                     <ul>
                         <a href="dashboard.jsp"><li>Dashboard</li></a>
                         <a href="order.jsp"><li>Orders</li></a>
-                        <a href="product.jsp"><li>Products</li></a>
+                        <a href="<%=path%>/ManageProduct"><li>Products</li></a>
                         <a href="#"><li>Customers</li></a>
                     </ul>
                 </div>
