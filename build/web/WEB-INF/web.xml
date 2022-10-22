@@ -52,6 +52,10 @@
         <servlet-name>CreateProduct</servlet-name>
         <servlet-class>controllers.CreateProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>controllers.UpdateProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/product-list</url-pattern>
@@ -104,6 +108,10 @@
     <servlet-mapping>
         <servlet-name>CreateProduct</servlet-name>
         <url-pattern>/AddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

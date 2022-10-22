@@ -344,18 +344,51 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        if (r != 0 ) {
+        if (r != 0) {
             return 1;
         } else {
             return 0;
         }
-       
+
+    }
+
+    public int updateProduct(Product p) {
+        int result = 0;
+        try {
+            String sql = "UPDATE Products\n"
+                    + "SET ProductName = ?,\n"
+                    + "    CategoryID = ?,\n"
+                    + "    QuantityPerUnit = ?,\n"
+                    + "    UnitPrice = ?,\n"
+                    + "    UnitsInStock = ?,\n"
+                    + "    UnitsOnOrder = ?,\n"
+                    + "    ReorderLevel = ?,\n"
+                    + "    Discontinued = ?\n"
+                    + "WHERE ProductID = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, p.getProductName());
+            ps.setString(2, String.valueOf(p.getCategoryID()));
+            ps.setString(3, p.getQuantityPerUnit());
+            ps.setString(4, String.valueOf(p.getUnitPrice()));
+            ps.setString(5, String.valueOf(p.getUnitsInStock()));
+            ps.setString(6, String.valueOf(p.getUnitsOnOrder()));
+            ps.setString(7, String.valueOf(p.getReorderLevel()));
+            ps.setString(8, String.valueOf(p.isDiscontinued()));
+            ps.setString(9, String.valueOf(p.getProductID()));
+
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        if (result != 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-         
-        int x = dao.addProduct(new Product(0, "iPhone 13", 9, "pcs", 1009, 2, 2, 2, false));
-        System.out.println(x);
+
+        System.out.println(dao.getProductByID(2));
     }
 }

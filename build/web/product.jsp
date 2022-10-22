@@ -58,7 +58,7 @@
                             <td>${i.getCategoryID()}</td>
                             <td>${i.isDiscontinued()}</td>
                             <td style="display: flex;">
-                                <a class="nav-link siennaa" href="edit.html?id=5">Edit</a> 
+                                <a class="nav-link siennaa" href="update?pid=${i.getProductID()}"> Edit</a> 
                                 <a class="nav-link siennaa" onclick="showMess(${i.getProductID()})">Delete</a>
                             </td>
                         </tr>
