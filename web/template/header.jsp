@@ -13,7 +13,7 @@
         <title>Shoe Store</title>
         <link rel="icon" type="image/x-icon" href="<%=path%>/img/logo.png">
         <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=path%>/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div id="container">

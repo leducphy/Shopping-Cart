@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin</title>
         <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=path%>/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </head>
     <body>
