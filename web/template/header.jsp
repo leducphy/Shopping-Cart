@@ -33,7 +33,7 @@
 
                 <div id="banner"  >
                     <ul style="margin-bottom: 0">
-                        <li><a href="<%=path%>/cart.jsp" class="nav-link siennaa" >Cart: 100$</a></li>
+                        <li><a href="<%=path%>/cart" class="nav-link siennaa" >Cart: ${size} ${size == null ? "0 item" : "items"}</a></li>
                             <%
                                 if(session.getAttribute("AccSession")==null){
                             %>

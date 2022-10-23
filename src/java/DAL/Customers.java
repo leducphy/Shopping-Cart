@@ -84,4 +84,9 @@ public class Customers {
         this.Email = Email;
     }
 
+    @Override
+    public String toString() {
+        return "Customers{" + "CustomerID=" + CustomerID + ", CompanyName=" + CompanyName + ", ContactName=" + ContactName + ", ContactTitle=" + ContactTitle + ", Address=" + Address + ", Role=" + Role + ", Email=" + Email + '}';
+    }
+
 }

@@ -6,9 +6,9 @@
 <%@include file="./template/header.jsp" %>
 <div id="content">
     <c:set var = "p" scope = "application" value = "${product}"></c:set>
-    <div id="content-detail">
-        <div id="content-title">
-            <a href="<%=path%>/category-list">Home</a> >
+        <div id="content-detail">
+            <div id="content-title">
+                <a href="<%=path%>/category-list">Home</a> >
             <a href="product-list?category-id=${categoryID}">${catName}</a> >  
             <a href="#"> Model: ${pid}</a> 
 
@@ -68,12 +68,12 @@
                                         <p style="color: gray; ">Out Of Stock</p>
                                     </c:otherwise>
                                 </c:choose>
-                                        
+
                             </div>
                             <div id="product-detail-buttons">
                                 <div id="product-detail-button">
-                                    <input type="button" value="BY NOW">
-                                    <input type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;">
+                                    <input onclick="buynow(${pid})" type="button" value="BY NOW">
+                                    <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;">
                                 </div>
                             </div>
                         </div>

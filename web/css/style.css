@@ -242,6 +242,17 @@
     cursor: pointer;
 }
 
+.type-sub{
+    width:100%;
+    background-color: brown;
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 40px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
 .msg-error{
     color: red;
     margin-bottom: 20px;
@@ -806,23 +817,23 @@
 .pagination {
     display: inline-block;
     text-align: center;
-     /*display: flex;*/
-  }
-  
-  .pagination a {
+    /*display: flex;*/
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-  }
-  
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: sienna;
     color: white;
     border-radius: 5px;
-  }
-  
-  .pagination a:hover:not(.active) {
+}
+
+.pagination a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
-  }
+}

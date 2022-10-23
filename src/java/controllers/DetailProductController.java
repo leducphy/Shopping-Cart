@@ -21,14 +21,13 @@ public class DetailProductController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         int pid = Integer.parseInt(req.getParameter("model"));
         Product product = dao.getProductByID(pid);
-        int categoryID = Integer.parseInt(req.getParameter("category-id"));
-        Category cat = new CategoryDAO().getCategoryByID(categoryID);
+        Category cat = new CategoryDAO().getCategoryByID(product.getCategoryID());
 
         req.setAttribute("pid", product.getProductID());
         req.setAttribute("pname", product.getProductName());
         req.setAttribute("pprice", product.getUnitPrice());
         req.setAttribute("pstatus", product.getUnitsInStock());
-        req.setAttribute("categoryID", categoryID);
+        req.setAttribute("categoryID", product.getCategoryID());
         req.setAttribute("catName", cat.getCategoryName());
 
         req.getRequestDispatcher("detail.jsp").forward(req, resp);

@@ -53,5 +53,19 @@ function showMess(id) {
 
 }
 
+function buynow(id) {
+    var option = confirm('Do you want to buy this product ? ');
+    if (option === true) {
+        window.location.href = 'buy?id=' + id + '&buy=true';
+    }
+}
 
-      
+
+
+function addToCart(id) {
+    var option = confirm('Do you want to add this product to cart : ' + id + ' ? ');
+    if (option === true) {
+        window.location.href = 'buy?id=' + id;
+
+    }
+}

@@ -56,6 +56,18 @@
         <servlet-name>UpdateProduct</servlet-name>
         <servlet-class>controllers.UpdateProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeAmountProduct</servlet-name>
+        <servlet-class>controllers.CartActionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveCartItem</servlet-name>
+        <servlet-class>controllers.RemoveCartItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartOrder</servlet-name>
+        <servlet-class>controllers.CartOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/product-list</url-pattern>
@@ -112,6 +124,18 @@
     <servlet-mapping>
         <servlet-name>UpdateProduct</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeAmountProduct</servlet-name>
+        <url-pattern>/change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveCartItem</servlet-name>
+        <url-pattern>/remove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartOrder</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

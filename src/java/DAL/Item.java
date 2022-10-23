@@ -9,6 +9,7 @@ package DAL;
  * @author leducphi
  */
 public class Item {
+
     private Product product;
     private int Quantity;
     private double UnitPrice;
@@ -45,6 +46,10 @@ public class Item {
     public void setUnitPrice(double UnitPrice) {
         this.UnitPrice = UnitPrice;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Item{" + "product=" + product + ", Quantity=" + Quantity + ", UnitPrice=" + UnitPrice + '}';
+    }
+
 }

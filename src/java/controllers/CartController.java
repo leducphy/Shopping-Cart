@@ -29,7 +29,12 @@ public class CartController extends HttpServlet {
 
         String idx = req.getParameter("id");
         int id = Integer.parseInt(idx);
-
+        boolean buy = false;
+        try {
+            buy = Boolean.parseBoolean(req.getParameter("buy"));
+        } catch (Exception e) {
+            buy = false;
+        }
         Cart cart = null;
         Object o = req.getSession().getAttribute("cart");
         if (o != null) {
@@ -49,19 +54,17 @@ public class CartController extends HttpServlet {
             //req.getSession().setAttribute("list", listP);
             List<Item> list = cart.getItems();
             req.getSession().setAttribute("cart", cart);
-            double t;
-            int as = 0;
-            for (Item ai : list) {
-                as = ai.getProduct().getProductID();
-            }
-            
-            t = cart.getTotalMoney();
-            req.getSession().setAttribute("t", t);
-            req.getSession().setAttribute("as", as);
-            
+            req.getSession().setAttribute("t", cart.getTotalMoney());
+
             //req.getRequestDispatcher("cart.jsp").forward(req, resp);
             req.getSession().setAttribute("size", list.size());
-            req.getRequestDispatcher("cart.jsp").forward(req, resp);
+//            req.getRequestDispatcher("cart.jsp").forward(req, resp);
+
+            if (!buy) {
+                resp.sendRedirect("detail?model=" + id);
+            } else {
+                req.getRequestDispatcher("cart.jsp").forward(req, resp);
+            }
 
         } catch (ServletException | IOException e) {
         }

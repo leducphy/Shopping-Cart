@@ -25,22 +25,19 @@
                                        font-style: oblique;
                                        margin: 50px;
                                        " 
-                                       href="detail?product-name=${p.getProduct().getProductName()}&category-id=${p.getProduct().getCategoryID()}&model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
+                                       href="detail?model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
                                 </div>
                                 <div class="cart-item-price">
                                     ${p.getProduct().getUnitPrice() * p.quantity}$
                                 </div>
                                 <div class="cart-item-button">
-                                    <!--<form action="amount" method="post">-->
                                     <a href="remove?id=${p.getProduct().getProductID()}">Remove</a>
-
-                                    <!--</form>-->
                                 </div>
                             </div>
                             <div class="cart-item-function">
-                                <a href="amount?num=-1&id=${p.getProduct().getProductID()}">-</a>  
-                                <input type="text" value="${p.quantity}"/>
-                                <a href="amount?num=1&id=${p.getProduct().getProductID()}">+</a>
+                                <a href="change?num=-1&id=${p.getProduct().getProductID()}">-</a>  
+                                <input type="text" value="${p.quantity}" disabled/>
+                                <a href="change?num=1&id=${p.getProduct().getProductID()}">+</a>
                             </div>
                         </div>
 
@@ -57,7 +54,7 @@
 
                             <div class="cart-item-infor">
                                 <div class="cart-item-img">
-                                    <img src="img/1.jpg"/>
+                                    <img src="img/9.jpg"/>
                                 </div>
                                 <div class="cart-item-name">
                                     <a style="
@@ -67,7 +64,7 @@
                                        font-style: oblique;
                                        margin: 50px;
                                        " 
-                                       href="detail?product-name=${p.getProduct().getProductName()}&category-id=${p.getProduct().getCategoryID()}&model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
+                                       href="detail?model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
                                 </div>
                                 <div class="cart-item-price">
                                     ${p.getProduct().getUnitPrice() * p.quantity}$
@@ -80,9 +77,9 @@
                                 </div>
                             </div>
                             <div class="cart-item-function">
-                                <a href="amount?num=-1&id=${p.getProduct().getProductID()}">-</a>  
-                                <a href="amount?num=1&id=${p.getProduct().getProductID()}">+</a>
-                                <input type="text" value="${p.quantity}"/>
+                                <a href="change?num=-1&id=${p.getProduct().getProductID()}">-</a>  
+                                <input type="text" value="${p.quantity}" disabled/>
+                                <a href="change?num=1&id=${p.getProduct().getProductID()}">+</a>
                             </div>
                         </div>
 
@@ -96,77 +93,80 @@
                     <c:out value="${t}"/> $
                 </span></div>
         </div>
-        <form action="signup_temporary" method="post">
-            <div id="customer-info">
-                <div id="customer-info-content">
-                    <h3>CUSTOMER INFORMATION:</h3>
-                    <div id="customer-info-detail">
-                        <c:choose >
-                            <c:when test="${sessionScope.AccSession != null}">
-                                <%
-                           
-                            String cid = "";
+        <form method="post" action="cart">
 
-                            String CompanyName = "";
-                            String ContactName = "";
-                            String ContactTitle = "";
-                            String Address = "";
-
-                             if(request.getSession().getAttribute("AccSession") != null) {
-                                  Account acc = (Account)(request.getSession().getAttribute("AccSession"));
-                                  cid = acc.getCustomerID();
-
-                            Customers cus = new CustomerDAO().getCustomersByID(cid);
-
-                            CompanyName = cus.getCompanyName();
-                            ContactName = cus.getContactName();
-                            ContactTitle = cus.getContactTitle();
-                            Address = cus.getAddress();
-                                %>
+            <c:choose >
+                <c:when test="${sessionScope.AccSession == null}">
+                    <div id="customer-info">
+                        <div id="customer-info-content">
+                            <h3>CUSTOMER INFORMATION:</h3>
+                            <div id="customer-info-detail">
                                 <div id="customer-info-left">
-                                    <input type="text" value="<%=CompanyName%>"/><br/>
-                                    <input type="text" value="<%=ContactName%>"/><br/>
+                                    <input type="text" placeholder="Company name *" name="txtCompanyName"/><br/>
+                                    <input type="text" placeholder="Contact name *" name="txtContactName"/><br/>
                                 </div>
                                 <div id="customer-info-right">
-                                    <input type="text" value="<%=ContactTitle%>"/><br/>
-                                    <input type="text" value="<%=Address%>"/><br/>
+                                    <input type="text" placeholder="Contact title *" name="txtContactTitle"/><br/>
+                                    <input type="text" placeholder="Address *" name="txtAddress"/><br/>
                                 </div>
-                                <%
-                            }
-                                %>
-                            </c:when>
-                            <c:when test="${sessionScope.AccSession == null}">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="customer-info">
+                        <div id="customer-info-content">
+                            <h3>PAYMENT METHODS:</h3>
+                            <div id="customer-info-payment">
+                                <div>
+                                    <input type="radio" name="rbPaymentMethod" checked/>
+                                    Payment C.O.D - Payment on delivery
+                                </div>
+                                <div>
+                                    <input type="radio" name="rbPaymentMethod" />
+                                    Payment via online payment gateway
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:when>
+
+                <c:when test="${sessionScope.AccSession != null}">
+                    <c:set value="${sessionScope.CusSession}" var="cus"/>
+                    <%--<c:out value="${cus.getCustomerID()}"/>--%> 
+                    <div id="customer-info">
+                        <div id="customer-info-content">
+                            <h3>CUSTOMER INFORMATION:</h3>
+                            <div id="customer-info-detail">
                                 <div id="customer-info-left">
-                                    <input type="text" placeholder="Company name *" name="comName"/><br/>
-                                    <input type="text" placeholder="Contact name *" name="contName"/><br/>
+                                    <input type="text" placeholder="Company name *" value="${cus.getCompanyName()}" /><br/>
+                                    <input type="text" placeholder="Contact name *" value="${cus.getContactName()}" /><br/>
                                 </div>
                                 <div id="customer-info-right">
-                                    <input type="text" placeholder="Contact title *" name="cTitle"/><br/>
-                                    <input type="text" placeholder="Address *" name="address"/><br/>
+                                    <input type="text" placeholder="Contact title *" value="${cus.getContactTitle()}" /><br/>
+                                    <input type="text" placeholder="Address *" value="${cus.getAddress()}" /><br/>
                                 </div>
-                            </c:when>
-                        </c:choose>
-                    </div>
-                </div>
-            </div>
-            <div id="customer-info">
-                <div id="customer-info-content">
-                    <h3>PAYMENT METHODS:</h3>
-                    <div id="customer-info-payment">
-                        <div>
-                            <input type="radio" name="rbPaymentMethod" checked/>
-                            Payment C.O.D - Payment on delivery
-                        </div>
-                        <div>
-                            <input type="radio" name="rbPaymentMethod" disabled/>
-                            Payment via online payment gateway
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div id="customer-info">
+                        <div id="customer-info-content">
+                            <h3>PAYMENT METHODS:</h3>
+                            <div id="customer-info-payment">
+                                <div>
+                                    <input type="radio" name="rbPaymentMethod" checked/>
+                                    Payment C.O.D - Payment on delivery
+                                </div>
+                                <div>
+                                    <input type="radio" name="rbPaymentMethod" />
+                                    Payment via online payment gateway
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:when>
 
+            </c:choose>
             <div id="cart-order">
-                <input type="submit" value="ORDER"/>
+                <input class="type-sub" type="submit" value="ORDER"/>
             </div>
         </form>
 

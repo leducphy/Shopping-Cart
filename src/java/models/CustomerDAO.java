@@ -42,23 +42,22 @@ public class CustomerDAO extends DBContext {
     public Customers getCustomersByID(String ID) {
         Customers cus = null;
         try {
-            String sql = "Select * from Customers where CustomerId=?";
+            String sql = "SELECT * FROM dbo.Customers WHERE CustomerID = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, ID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String CustomerID = rs.getString("CustomerID");
                 String CompanyName = rs.getString("CompanyName");
                 String ContactName = rs.getString("ContactName");
                 String ContactTitle = rs.getString("ContactTitle");
                 String Address = rs.getString("Address");
-                String Role = rs.getString("Role");
-                String Email = rs.getString("Email");
-                cus = new Customers(CustomerID, CompanyName, ContactName, ContactTitle, Address, Role, Email);
+                
+                cus = new Customers(ID, CompanyName, ContactName, ContactTitle, Address, null, null);
 
             }
         } catch (SQLException e) {
+            System.err.println(e);
         }
         return cus;
     }
@@ -79,11 +78,12 @@ public class CustomerDAO extends DBContext {
             ps.setString(5, cusID);
             ps.executeUpdate();
         } catch (SQLException e) {
+            System.err.println(e);
         }
     }
 
-//    public static void main(String[] args) {
-//        Customers c = new CustomerDAO().getProfile(5);
-//        System.out.println(c.toString());
-//    }
+    public static void main(String[] args) {
+        new CustomerDAO().updateProfile("GUEST", "12g", "g", "x", "x");
+        System.out.println(new CustomerDAO().getCustomersByID("AWMAA"));
+    }
 }

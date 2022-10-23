@@ -21,10 +21,10 @@
             
             <c:forEach items="${products}" var="p">
                 <div class="product card-body">
-                    <a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}&model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
-                    <div class="name card-title"><a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}>&model=${p.getCategoryID()}">${p.getProductName()}</a></div>
+                    <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
+                    <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}" class="btn btn-primary buynow" >Buy now</a></div>
+                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
                 </div>
             </c:forEach>
 
@@ -73,10 +73,10 @@
         <div class="content-main">
             <c:forEach items="${productHotList}" var="p">
                 <div class="product card-body">
-                    <a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}&model=${p.getProductID()}"><img src="img/9.jpg" width="100%"/></a>
-                    <div class="name card-title"><a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}>&model=${p.getCategoryID()}">${p.getProductName()}</a></div>
+                    <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
+                    <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}" class="btn btn-primary buynow" >Buy now</a></div>
+                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
                 </div>
             </c:forEach>
         </div>
@@ -84,10 +84,10 @@
         <div class="content-main">
             <c:forEach items="${productBestSaleList}" var="p">
                 <div class="product card-body">
-                    <a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}&model=${p.getProductID()}"><img src="img/8.jpg" width="100%"/></a>
-                    <div class="name card-title"><a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}>&model=${p.getCategoryID()}">${p.getProductName()}</a></div>
+                    <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
+                    <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}" class="btn btn-primary buynow" >Buy now</a></div>
+                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
                 </div>
             </c:forEach>
         </div>
@@ -95,10 +95,10 @@
         <div class="content-main">
             <c:forEach items="${NEWproductList}" var="p">
                 <div class="product card-body">
-                    <a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}&model=${p.getProductID()}"><img src="img/10.jpg" width="100%"/></a>
-                    <div class="name card-title"><a href="detail?product-name=${p.getProductName()}&category-id=${p.getCategoryID()}>&model=${p.getCategoryID()}">${p.getProductName()}</a></div>
+                    <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
+                    <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}" class="btn btn-primary buynow" >Buy now</a></div>
+                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
                 </div>
             </c:forEach>
         </div>

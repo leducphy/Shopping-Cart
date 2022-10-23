@@ -8,6 +8,8 @@ import DAL.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,18 +35,18 @@ public class OrderDAO extends DBContext {
                     + "    ShipCountry\n"
                     + ")\n"
                     + "VALUES\n"
-                    + "(   N'?',       -- CustomerID - nchar(5)\n"
+                    + "(   ?,       -- CustomerID - nchar(5)\n"
                     + "    ?,         -- EmployeeID - int\n"
                     + "    GETDATE(), -- OrderDate - datetime\n"
                     + "    GETDATE(), -- RequiredDate - datetime\n"
                     + "    GETDATE(), -- ShippedDate - datetime\n"
                     + "    ?,      -- Freight - money\n"
-                    + "    N'?',       -- ShipName - nvarchar(40)\n"
-                    + "    N'?',       -- ShipAddress - nvarchar(60)\n"
-                    + "    N'?',       -- ShipCity - nvarchar(15)\n"
-                    + "    N'?',       -- ShipRegion - nvarchar(15)\n"
-                    + "    N'?',       -- ShipPostalCode - nvarchar(10)\n"
-                    + "    N'?'        -- ShipCountry - nvarchar(15)\n"
+                    + "    ?,       -- ShipName - nvarchar(40)\n"
+                    + "    ?,       -- ShipAddress - nvarchar(60)\n"
+                    + "    ?,       -- ShipCity - nvarchar(15)\n"
+                    + "    ?,       -- ShipRegion - nvarchar(15)\n"
+                    + "    ?,       -- ShipPostalCode - nvarchar(10)\n"
+                    + "    ?        -- ShipCountry - nvarchar(15)\n"
                     + "    )";
 
             PreparedStatement ps1 = connection.prepareStatement(sql1);
@@ -98,5 +100,17 @@ public class OrderDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+        ArrayList<Product> al = dao.searchProductName("ch");
+        Customers c = new Customers("UUJRV", "FU", "PHI LE", "PHI", "HA NOI", null, null);
+        Item i = new Item(dao.getProductByID(2), 2, 99);
+        ArrayList<Item> li = new ArrayList<>();
+        li.add(i);
+        Cart ca = new Cart(li);
+        new OrderDAO().addOrder(c, ca);
+        System.out.println(c);
     }
 }
