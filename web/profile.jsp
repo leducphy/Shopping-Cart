@@ -11,7 +11,7 @@
                 </ul>
                 <h3>My order</h3>
                 <ul>
-                    <a href="<%=path%>/profile1.jsp"><li>All orders</li></a>
+                    <a href="<%=path%>/order-detail"><li>All orders</li></a>
                     <a href="#"><li>Canceled order</li></a>
                 </ul>
             </div>

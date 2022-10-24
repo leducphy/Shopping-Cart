@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class OrderDAO extends DBContext {
 
-    public void addOrder(Customers cus, Cart cart) {
+    public void addOrder(Customers cus, Cart cart, String RequiedDate) {
         try {
             String sql1 = "INSERT INTO dbo.Orders\n"
                     + "(\n"
@@ -36,29 +35,25 @@ public class OrderDAO extends DBContext {
                     + ")\n"
                     + "VALUES\n"
                     + "(   ?,       -- CustomerID - nchar(5)\n"
-                    + "    ?,         -- EmployeeID - int\n"
+                    + "    NULL,         -- EmployeeID - int\n"
                     + "    GETDATE(), -- OrderDate - datetime\n"
-                    + "    GETDATE(), -- RequiredDate - datetime\n"
-                    + "    GETDATE(), -- ShippedDate - datetime\n"
-                    + "    ?,      -- Freight - money\n"
+                    + "    ?, -- RequiredDate - datetime\n"
+                    + "    NULL, -- ShippedDate - datetime\n"
+                    + "    NULL,      -- Freight - money\n"
                     + "    ?,       -- ShipName - nvarchar(40)\n"
                     + "    ?,       -- ShipAddress - nvarchar(60)\n"
-                    + "    ?,       -- ShipCity - nvarchar(15)\n"
-                    + "    ?,       -- ShipRegion - nvarchar(15)\n"
-                    + "    ?,       -- ShipPostalCode - nvarchar(10)\n"
-                    + "    ?        -- ShipCountry - nvarchar(15)\n"
+                    + "    NULL,       -- ShipCity - nvarchar(15)\n"
+                    + "    NULL,       -- ShipRegion - nvarchar(15)\n"
+                    + "    NULL,       -- ShipPostalCode - nvarchar(10)\n"
+                    + "    NULL        -- ShipCountry - nvarchar(15)\n"
                     + "    )";
 
             PreparedStatement ps1 = connection.prepareStatement(sql1);
             ps1.setString(1, cus.getCustomerID());
-            ps1.setInt(2, 7);
-            ps1.setDouble(3, 12.5);
-            ps1.setString(4, cus.getContactName());
-            ps1.setString(5, cus.getAddress());
-            ps1.setString(6, cus.getAddress());
-            ps1.setString(7, cus.getAddress());
-            ps1.setString(8, cus.getAddress());
-            ps1.setString(9, cus.getAddress());
+            ps1.setString(2, RequiedDate);
+            ps1.setString(3, cus.getContactName());
+            ps1.setString(4, cus.getAddress());
+
             ps1.executeUpdate();
 
             //lay ra orderID cua sql1 vua add
@@ -102,15 +97,62 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        ArrayList<Product> al = dao.searchProductName("ch");
-        Customers c = new Customers("UUJRV", "FU", "PHI LE", "PHI", "HA NOI", null, null);
-        Item i = new Item(dao.getProductByID(2), 2, 99);
-        ArrayList<Item> li = new ArrayList<>();
-        li.add(i);
-        Cart ca = new Cart(li);
-        new OrderDAO().addOrder(c, ca);
-        System.out.println(c);
+    public ArrayList<OrderDetailsDTO> getListOrderByCusID(String cid) {
+        ArrayList<OrderDetailsDTO> li = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM Orders\n"
+                    + "WHERE CustomerID = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cid);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int OrderID = rs.getInt("OrderID");
+                int ProductID = 0;
+                double UnitPrice = 0;
+                int Quantity = 0;
+                String CustomerID = rs.getString("CustomerID");
+                String OrderDate = rs.getString("OrderDate");
+                String RequiredDate = rs.getString("RequiredDate");
+                String ShipName = rs.getString("ShipName");
+                String ShipAddres = rs.getString("ShipAddress");
+                li.add(new OrderDetailsDTO(OrderID, ProductID, UnitPrice, Quantity, CustomerID, OrderDate, RequiredDate, ShipName, ShipAddres));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return li;
     }
+
+    public ArrayList<OrderDetailsDTO> getListOrderDetailByOID(ArrayList<OrderDetailsDTO> lobid) {
+        ArrayList<OrderDetailsDTO> li = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM dbo.[Order Details]\n"
+                    + "WHERE OrderID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            for (OrderDetailsDTO o : lobid) {
+                ps.setInt(1, o.getOrderID());
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int OrderID = rs.getInt("OrderID");
+                    int ProductID = rs.getInt("ProductID");
+                    double UnitPrice = rs.getDouble("UnitPrice");
+                    int Quantity = rs.getInt("Quantity");
+                    String CustomerID = null;
+                    String OrderDate = null;
+                    String RequiredDate = null;
+                    String ShipName = null;
+                    String ShipAddres = null;
+                    li.add(new OrderDetailsDTO(OrderID, ProductID, UnitPrice, Quantity, CustomerID, OrderDate, RequiredDate, ShipName, ShipAddres));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return li;
+    }
+
+
 }

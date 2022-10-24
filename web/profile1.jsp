@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="./template/header.jsp" %>
 
 <div id="content">
@@ -9,7 +10,7 @@
         </ul>
         <h3>My order</h3>
         <ul>
-            <a href="<%=path%>/profile1.jsp"><li>All orders</li></a>
+            <a href="#"><li>All orders</li></a>
             <a href="#"><li>Canceled order</li></a>
         </ul>
     </div>
@@ -17,62 +18,33 @@
         <div class="path">LIST ORDERS</b></div>
         <div class="content-main">
             <div id="profile-content-order">
-                <div>
-                    <div class="profile-order-title">
-                        <div class="profile-order-title-left">
-                            <div>Order creation date: 27-9-2022</div>
-                            <div>Order: <a href="#">#1</a></div>
+                <c:forEach items="${listOrder}" var="o" >
+                    <div>
+                        <div class="profile-order-title">
+                            <div class="profile-order-title-left">
+                                <div>Order creation date: ${o.getOrderDate()}</div>
+                                <div>Order: <a href="#">#${o.getOrderID()}</a></div>
+                            </div>
+                            <div class="profile-order-title-right">
+                                <span>Pending</span>
+                            </div>
                         </div>
-                        <div class="profile-order-title-right">
-                            <span>Pending</span>
-                        </div>
-                    </div>
-                    <div class="profile-order-content">
-                        <div class="profile-order-content-col1">
-                            <a href="detail.html"><img src="img/2.jpg" width="100%"/></a>
-                        </div>
-                        <div class="profile-order-content-col2">Product 12</div>
-                        <div class="profile-order-content-col3">Quantity: 1</div>
-                        <div class="profile-order-content-col4">1000 $</div>
-                    </div>
-                    <div class="profile-order-content">
-                        <div class="profile-order-content-col1">
-                            <a href="detail.html"><img src="img/1.jpg" width="100%"/></a>
-                        </div>
-                        <div class="profile-order-content-col2">Product 1</div>
-                        <div class="profile-order-content-col3">Quantity: 2</div>
-                        <div class="profile-order-content-col4">2000 $</div>
-                    </div>
 
-                </div>
-                <div>
-                    <div class="profile-order-title">
-                        <div class="profile-order-title-left">
-                            <div>Order creation date: 25-9-2022</div>
-                            <div>Order: <a href="#">#2</a></div>
-                        </div>
-                        <div class="profile-order-title-right">
-                            <span style="color: blue;">Completed</span>
-                        </div>
+                        <c:forEach items="${listOrderDetail}" var="od">
+                            <c:if test="${o.getOrderID() == od.getOrderID()}" >
+                                <div class="profile-order-content">
+                                    <div class="profile-order-content-col1">
+                                        <a href="detail.html"><img src="img/6.jpg" width="100%"/></a>
+                                    </div>
+                                    <div class="profile-order-content-col2 " style="">${od.getProductName()}</div>
+                                    <div class="profile-order-content-col3">Quantity: ${od.getQuantity()}</div>
+                                    <div class="profile-order-content-col4">${od.getUnitPrice()} $</div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
                     </div>
-                    <div class="profile-order-content">
-                        <div class="profile-order-content-col1">
-                            <a href="detail.html"><img src="img/2.jpg" width="100%"/></a>
-                        </div>
-                        <div class="profile-order-content-col2">Product 12</div>
-                        <div class="profile-order-content-col3">Quantity: 1</div>
-                        <div class="profile-order-content-col4">1000 $</div>
-                    </div>
-                    <div class="profile-order-content">
-                        <div class="profile-order-content-col1">
-                            <a href="detail.html"><img src="img/1.jpg" width="100%"/></a>
-                        </div>
-                        <div class="profile-order-content-col2">Product 1</div>
-                        <div class="profile-order-content-col3">Quantity: 2</div>
-                        <div class="profile-order-content-col4">2000 $</div>
-                    </div>
-
-                </div>
+                </c:forEach>
+                
             </div>
         </div>
     </div>

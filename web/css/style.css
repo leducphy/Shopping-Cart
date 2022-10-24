@@ -633,6 +633,7 @@
     width: 100%;
     display: flex;
     border-bottom: 1px solid gainsboro;
+    margin: 20px;
 }
 
 .profile-order-content-col1{
@@ -839,3 +840,9 @@
 }
 
 
+.pnamehehe{
+
+    color: sienna;
+    font-size: 20px;
+    font-style: oblique;
+}
