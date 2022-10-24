@@ -69,3 +69,5 @@ function addToCart(id) {
 
     }
 }
+
+document.getElementById('datePicker').valueAsDate = new Date();

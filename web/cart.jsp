@@ -1,6 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="./template/header.jsp" %> 
-
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
+<%
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDateTime now = LocalDateTime.now();
+    String date = dtf.format(now);
+%>
 <div id="content">
     <div id="cart">
         <div id="cart-title">
@@ -101,13 +107,15 @@
                         <div id="customer-info-content">
                             <h3>CUSTOMER INFORMATION:</h3>
                             <div id="customer-info-detail">
-                                <div id="customer-info-left">
-                                    <input type="text" placeholder="Company name *" name="txtCompanyName"/><br/>
-                                    <input type="text" placeholder="Contact name *" name="txtContactName"/><br/>
+                                <div id="customer-info-left" >
+                                    <input type="text" placeholder="Company name *" name="txtCompanyName" required  /><br/>
+                                    <input type="text" placeholder="Contact name *" name="txtContactName" required /><br/>
+                                    Required Date<br/>
+                                    <input type="date" name="txtRequiredDate" value="<%=date%>" min="<%=date%>" max="2099-12-30" required />
                                 </div>
                                 <div id="customer-info-right">
-                                    <input type="text" placeholder="Contact title *" name="txtContactTitle"/><br/>
-                                    <input type="text" placeholder="Address *" name="txtAddress"/><br/>
+                                    <input type="text" placeholder="Contact title *" name="txtContactTitle" required /><br/>
+                                    <input type="text" placeholder="Address *" name="txtAddress"  required /><br/>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +126,7 @@
                             <div id="customer-info-payment">
                                 <div>
                                     <input type="radio" name="rbPaymentMethod" checked/>
-                                    Payment C.O.D - Payment on delivery
+                                    Payment C.O.D - Payment on delivery 
                                 </div>
                                 <div>
                                     <input type="radio" name="rbPaymentMethod" />
@@ -135,14 +143,16 @@
                     <div id="customer-info">
                         <div id="customer-info-content">
                             <h3>CUSTOMER INFORMATION:</h3>
-                            <div id="customer-info-detail">
+                            <div id="customer-info-detail" >
                                 <div id="customer-info-left">
-                                    <input type="text" placeholder="Company name *" value="${cus.getCompanyName()}" /><br/>
-                                    <input type="text" placeholder="Contact name *" value="${cus.getContactName()}" /><br/>
+                                    <input type="text" placeholder="Company name *" value="${cus.getCompanyName()} "  required/><br/>
+                                    <input type="text" placeholder="Contact name *" value="${cus.getContactName()}" required/><br/>
+                                    Required Date<br/>
+                                    <input type="date" name="txtRequiredDate" value="<%=date%>" min="<%=date%>" max="2099-12-30" required />
                                 </div>
                                 <div id="customer-info-right">
-                                    <input type="text" placeholder="Contact title *" value="${cus.getContactTitle()}" /><br/>
-                                    <input type="text" placeholder="Address *" value="${cus.getAddress()}" /><br/>
+                                    <input type="text" placeholder="Contact title *" value="${cus.getContactTitle()}" required/><br/>
+                                    <input type="text" placeholder="Address *" value="${cus.getAddress()}" required/><br/>
                                 </div>
                             </div>
                         </div>

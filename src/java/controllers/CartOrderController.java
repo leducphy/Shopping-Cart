@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Random;
 
 /**
@@ -26,6 +27,7 @@ public class CartOrderController extends HttpServlet {
         String ContactName = req.getParameter("txtContactName");
         String ContactTitle = req.getParameter("txtContactTitle");
         String Address = req.getParameter("txtAddress");
+//        Date date = (Date)req.getParameter("txtRequiredDate");
         Customers customer = (Customers) req.getSession().getAttribute("CusSession");
         Account acc = (Account) req.getSession().getAttribute("AccSession");
 
@@ -46,6 +48,7 @@ public class CartOrderController extends HttpServlet {
                 new OrderDAO().addOrder(guest, cart);
                 req.getSession().removeAttribute("cart");
                 req.getSession().setAttribute("size", 0);
+                req.getSession().setAttribute("t", 0);
                 req.getRequestDispatcher("index.jsp").forward(req, resp);
             } else {
                 new OrderDAO().addOrder(customer, cart);
@@ -65,5 +68,12 @@ public class CartOrderController extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         req.getRequestDispatcher("cart.jsp").forward(req, resp);
     }
+    
+    
+    public static void main(String[] args) {
+        
+    }
+    
+    
 
 }

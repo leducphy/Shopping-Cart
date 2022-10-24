@@ -15,7 +15,7 @@
         <link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="<%=path%>/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body >
         <div id="container">
             <div id="header">
                 <div id="logo">

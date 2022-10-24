@@ -7,11 +7,11 @@
                 <h3 style="font-weight: normal;">Welcome, <%=cus.getContactName()%></h3>
                 <h3>Account Management</h3>
                 <ul>
-                    <a href="../profile.jsp"><li>Personal information</li></a>
+                    <a href="<%=path%>/profile.jsp"><li>Personal information</li></a>
                 </ul>
                 <h3>My order</h3>
                 <ul>
-                    <a href="profile1.jsp"><li>All orders</li></a>
+                    <a href="<%=path%>/profile1.jsp"><li>All orders</li></a>
                     <a href="#"><li>Canceled order</li></a>
                 </ul>
             </div>
