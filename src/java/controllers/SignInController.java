@@ -48,8 +48,10 @@ public class SignInController extends HttpServlet {
                 req.getSession().setAttribute("AccSession", acc);
                 //dieu huong toi index
                 if (acc.getRole()==2) {
+                    req.getSession().setAttribute("role", acc.getRole());
                     resp.sendRedirect(req.getContextPath() + "/category-list");
                 } else if(acc.getRole() == 1){
+                    req.getSession().setAttribute("role", acc.getRole());
                     resp.sendRedirect(req.getContextPath() + "/dashboard.jsp");
                 }
                 

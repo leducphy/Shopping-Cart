@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% String path =request.getContextPath();%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </head>
     <body>
+        <c:if test="${sessionScope.AccSession.role eq 2 || sessionScope.AccSession.role eq null}">
+            <c:redirect url="ErrorPage/error404.jsp"/>
+        </c:if>
+
         <div id="container">
             <div id="header">
                 <div id="logo-admin">
