@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * @author leducphi
  */
 public class OrderDAO extends DBContext {
+
     static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 
     public void addOrder(Customers cus, Cart cart, String RequiedDate) {
@@ -186,10 +187,20 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public void cancelOrderByID(int oid) {
+        String sql = "update orders set [RequiredDate] = null where OrderID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, oid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
-            ArrayList<Order> list = new OrderDAO().getListByFilterDate("2022-10-20", "2022-10-25");
-            System.out.println(list);
+       new OrderDAO().cancelOrderByID(11112);
     }
 
 }

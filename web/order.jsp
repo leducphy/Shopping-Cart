@@ -49,21 +49,18 @@
                                         Completed
                                     </td>
                                 </c:when>
+                                <c:when test="${item.getRequiredDate() == null}">
+                                    <td style="color: red;">Order canceled</td>
+                                </c:when>
                                 <c:when test="${item.getShippedDate() == null}">
                                     <td style="color: blue;">
                                         Pending | <a href="cancel?oid=${item.getOrderID()}">Cancel</a>                                    
                                     </td>
                                 </c:when>
-                                <c:otherwise>
-                                    <td style="color: red;">Order canceled</td>
-                                </c:otherwise>
                             </c:choose>
-<!--                            <td style="color: ${item.getShippedDate() != null ? "green" : "blue"};">
-                                ${item.getShippedDate() != null ? "Completed" : "Pending"}
-                            </td>-->
                         </tr>
                     </c:forEach>
-                    <tr>
+<!--                    <tr>
                         <td><a href="#">#4</a></td>
                         <td>11-10-2022</td>
                         <td>12-10-2022</td>
@@ -104,7 +101,7 @@
                         <td style="color: green;">Completed</td>
                     </tr>
                 </table>
-            </div>
+            </div>-->
             <div id="paging">
                 <div class="pagination">
                     <a href="#">&laquo;</a>

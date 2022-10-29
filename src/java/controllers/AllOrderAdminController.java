@@ -29,12 +29,12 @@ public class AllOrderAdminController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        ArrayList<Order> list = new OrderDAO().getListByFilterDate("1996-09-11", "2000-10-25");
+        ArrayList<Order> list = new OrderDAO().getListByFilterDate("1996-09-11", "2022-10-25");
         String txtStartOrderDate = req.getParameter("txtStartOrderDate");
         String txtEndOrderDate = req.getParameter("txtEndOrderDate");
         req.setAttribute("txtStartOrderDate", txtStartOrderDate);
         req.setAttribute("txtEndOrderDate", txtEndOrderDate);
-//        req.setAttribute("listFilter", list);
+        req.setAttribute("listFilter", list);
         req.getRequestDispatcher("order.jsp").forward(req, resp);
     }
 
