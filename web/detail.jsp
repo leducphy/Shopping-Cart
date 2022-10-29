@@ -59,23 +59,34 @@
                             <h2 style="color: sienna;
                                 font-style: oblique;">${pname}</h2>
                             <div id="product-price">$ ${pprice}</div>
-                            <div id="product-status">
-                                <c:choose>
-                                    <c:when test="${pstatus > 0}">
-                                        <p style=" ">In Stock</p>
-                                    </c:when>    
-                                    <c:otherwise>
-                                        <p style="color: gray; ">Out Of Stock</p>
-                                    </c:otherwise>
-                                </c:choose>
 
-                            </div>
-                            <div id="product-detail-buttons">
-                                <div id="product-detail-button">
-                                    <input onclick="buynow(${pid})" type="button" value="BY NOW">
-                                    <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;">
-                                </div>
-                            </div>
+                            <c:choose>
+                                <c:when test="${pstatus > 0}">
+                                    <div id="product-status">
+                                        <p style=" ">In Stock</p>
+                                    </div>
+                                    <div id="product-detail-buttons">
+                                        <div id="product-detail-button">
+                                            <input onclick="buynow(${pid})" type="button" value="BY NOW">
+                                            <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;">
+                                        </div>
+                                    </div>
+                                </c:when>    
+                                <c:otherwise>
+                                    <div id="product-status">
+                                        <p style="color: gray; ">Out Of Stock</p>
+                                    </div>
+                                    <div id="product-detail-buttons">
+                                        <div id="product-detail-button">
+                                            <input onclick="buynow(${pid})" type="button" value="BY NOW" disabled>
+                                            <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;" disabled>
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
                         </div>
                     </div>
                 </div>

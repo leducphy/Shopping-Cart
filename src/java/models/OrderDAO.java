@@ -161,7 +161,7 @@ public class OrderDAO extends DBContext {
     public ArrayList<Order> getListOrders() {
         ArrayList<Order> list = new ArrayList<>();
         try {
-            String sql = "select * from Orders";
+            String sql = "select * from orders order by OrderID desc";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

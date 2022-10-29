@@ -95,9 +95,20 @@
 
         </c:choose>
         <div id="cart-summary">
-            <div id="cart-summary-content">Total amount: <span style="color:red">
-                    <c:out value="${t}"/> $
-                </span></div>
+            <div id="cart-summary-content">
+                <c:choose>
+                    <c:when test="${t != 0}">
+                        Total amount: 
+                        <span style="color:red">
+                            <c:out value="${t}"/> $
+                        </span>
+                    </c:when>    
+                    <c:otherwise>
+                        <h4 style="padding: 100px;">You need at least 1 product in your cart to order </h4>
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
         </div>
         <form method="post" action="cart">
 
