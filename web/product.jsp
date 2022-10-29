@@ -4,9 +4,6 @@
 <%@page import="models.*" %>
 <%@page import="java.util.*" %>
 <%@include file="./template/header_admin.jsp" %> 
-<%
-    ArrayList<Category> list = new CategoryDAO().getCategory();
-%>
 <div id="content-right">
     <div class="path-admin">PRODUCTS LIST</b></div>
     <div class="content-main">

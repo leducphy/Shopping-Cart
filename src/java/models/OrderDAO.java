@@ -158,6 +158,34 @@ public class OrderDAO extends DBContext {
         return li;
     }
 
+    public ArrayList<Order> getListOrders() {
+        ArrayList<Order> list = new ArrayList<>();
+        try {
+            String sql = "select * from Orders";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int OrderID = rs.getInt("OrderID");
+                String CustomerID = rs.getString("CustomerID");
+                int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
+                String ShipName = rs.getString("ShipName");
+                String ShipAddress = rs.getString("ShipAddress");
+                String ShipCity = rs.getString("ShipCity");
+                String ShipRegion = rs.getString("ShipRegion");
+                String ShipPostalCode = rs.getString("ShipPostalCode");
+                String ShipCountry = rs.getString("ShipCountry");
+                list.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public ArrayList<Order> getListByFilterDate(String start, String end) {
         ArrayList<Order> list = new ArrayList<>();
         try {
@@ -200,7 +228,11 @@ public class OrderDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-       new OrderDAO().cancelOrderByID(11112);
+        
+        ArrayList<Order> li = (new OrderDAO().getListOrders());
+        for (Order x : li) {
+            System.out.println(x);
+        }
     }
 
 }
