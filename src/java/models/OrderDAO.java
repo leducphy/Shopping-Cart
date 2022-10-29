@@ -5,9 +5,11 @@
 package models;
 
 import DAL.*;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ import java.util.ArrayList;
  * @author leducphi
  */
 public class OrderDAO extends DBContext {
+    static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 
     public void addOrder(Customers cus, Cart cart, String RequiedDate) {
         try {
@@ -154,5 +157,39 @@ public class OrderDAO extends DBContext {
         return li;
     }
 
+    public ArrayList<Order> getListByFilterDate(String start, String end) {
+        ArrayList<Order> list = new ArrayList<>();
+        try {
+            String sql = "select * from Orders o where o.OrderDate between ? and ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, start);
+            ps.setString(2, end);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int OrderID = rs.getInt("OrderID");
+                String CustomerID = rs.getString("CustomerID");
+                int EmployeeID = rs.getInt("EmployeeID");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date RequiredDate = rs.getDate("RequiredDate");
+                Date ShippedDate = rs.getDate("ShippedDate");
+                double Freight = rs.getDouble("Freight");
+                String ShipName = rs.getString("ShipName");
+                String ShipAddress = rs.getString("ShipAddress");
+                String ShipCity = rs.getString("ShipCity");
+                String ShipRegion = rs.getString("ShipRegion");
+                String ShipPostalCode = rs.getString("ShipPostalCode");
+                String ShipCountry = rs.getString("ShipCountry");
+                list.add(new Order(OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+            ArrayList<Order> list = new OrderDAO().getListByFilterDate("2022-10-20", "2022-10-25");
+            System.out.println(list);
+    }
 
 }

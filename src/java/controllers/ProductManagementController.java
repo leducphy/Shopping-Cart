@@ -46,7 +46,7 @@ public class ProductManagementController extends HttpServlet {
             req.setAttribute("page", page);
             req.setAttribute("numberOfPage", numberOfPage);
             req.getRequestDispatcher("product.jsp").forward(req, resp);
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
         }
     }
 
