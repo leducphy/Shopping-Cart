@@ -18,11 +18,6 @@ import models.ProductDAO;
 public class DeleteProductController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int ProductID = Integer.parseInt(req.getParameter("id"));
         ProductDAO dao = new ProductDAO();

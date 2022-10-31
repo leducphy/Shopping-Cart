@@ -53,7 +53,7 @@
                                 </c:when>
                                 <c:when test="${item.getShippedDate() == null}">
                                     <td style="color: blue;">
-                                        Pending | <a href="cancel?oid=${item.getOrderID()}">Cancel</a>                                    
+                                        Pending | <a onclick="deleteOrder(${item.getOrderID()})">Cancel</a>                                    
                                     </td>
                                 </c:when>
                             </c:choose>

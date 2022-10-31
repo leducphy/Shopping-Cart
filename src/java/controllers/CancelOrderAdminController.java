@@ -17,14 +17,6 @@ import models.OrderDAO;
  */
 public class CancelOrderAdminController extends HttpServlet {
 
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        int oid = Integer.parseInt(req.getParameter("oid"));
-//        OrderDAO dao = new OrderDAO();
-//        dao.cancelOrderByID(oid);
-//        resp.sendRedirect(req.getContextPath() + "/OrderManage");
-//    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int oid = Integer.parseInt(req.getParameter("oid"));

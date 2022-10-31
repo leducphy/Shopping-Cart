@@ -53,6 +53,16 @@ function showMess(id) {
 
 }
 
+
+function deleteOrder(id) {
+    var option = confirm('Do you want to delete order : ' + id + ' ? ');
+    if (option === true) {
+        window.location.href = 'cancel?oid=' + id; 
+    }
+
+
+}
+
 function buynow(id) {
     var option = confirm('Do you want to buy this product ? ');
     if (option === true) {
