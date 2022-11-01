@@ -23,8 +23,6 @@ public class ProfileController extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         int accountID = Integer.parseInt(req.getParameter("accountID"));
         req.getSession().setAttribute("accID", accountID);
-        Customers cus = new CustomerDAO().getProfile(accountID);
-        req.getSession().setAttribute("CusSession", cus);
         req.getRequestDispatcher("../profile.jsp").forward(req, resp);
     }
 }

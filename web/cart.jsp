@@ -12,99 +12,56 @@
         <div id="cart-title">
             <h3>SHOPPING CART</h3>
         </div>
-        <c:choose >
-            <c:when test="${sessionScope.AccSession == null}">
-                <c:set value="${sessionScope.cart}" var="c"/>
-                <c:forEach var="p" items="${c.items}">
-                    <div id="cart-content">
-                        <div class="cart-item">
 
-                            <div class="cart-item-infor">
-                                <div class="cart-item-img">
-                                    <img src="img/6.jpg"/>
-                                </div>
-                                <div class="cart-item-name">
-                                    <a style="
-                                       text-decoration: none;
-                                       color: sienna;
-                                       font-size: 20px;
-                                       font-style: oblique;
-                                       margin: 50px;
-                                       " 
-                                       href="detail?model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
-                                </div>
-                                <div class="cart-item-price">
-                                    ${p.getProduct().getUnitPrice() * p.quantity}$
-                                </div>
-                                <div class="cart-item-button">
-                                    <a href="remove?id=${p.getProduct().getProductID()}">Remove</a>
-                                </div>
-                            </div>
-                            <div class="cart-item-function">
-                                <a href="change?num=-1&id=${p.getProduct().getProductID()}">-</a>  
-                                <input type="text" value="${p.quantity}" disabled/>
-                                <a href="change?num=1&id=${p.getProduct().getProductID()}">+</a>
-                            </div>
+        <c:set value="${sessionScope.cart}" var="c"/>
+        <c:forEach var="p" items="${c.items}">
+            <div id="cart-content">
+                <div class="cart-item">
+
+                    <div class="cart-item-infor">
+                        <div class="cart-item-img">
+                            <img src="img/9.jpg"/>
                         </div>
-
-                    </div>
-                </c:forEach>
-            </c:when>
-
-            <c:when test="${sessionScope.AccSession != null}">
-
-                <c:set value="${sessionScope.cart}" var="c"/>
-                <c:forEach var="p" items="${c.items}">
-                    <div id="cart-content">
-                        <div class="cart-item">
-
-                            <div class="cart-item-infor">
-                                <div class="cart-item-img">
-                                    <img src="img/9.jpg"/>
-                                </div>
-                                <div class="cart-item-name">
-                                    <a style="
-                                       text-decoration: none;
-                                       color: sienna;
-                                       font-size: 20px;
-                                       font-style: oblique;
-                                       margin: 50px;
-                                       " 
-                                       href="detail?model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
-                                </div>
-                                <div class="cart-item-price">
-                                    ${p.getProduct().getUnitPrice() * p.quantity}$
-                                </div>
-                                <div class="cart-item-button">
-                                    <!--<form action="amount" method="post">-->
-                                    <a href="remove?id=${p.getProduct().getProductID()}">Remove</a>
-
-                                    <!--</form>-->
-                                </div>
-                            </div>
-                            <div class="cart-item-function">
-                                <a href="change?num=-1&id=${p.getProduct().getProductID()}">-</a>  
-                                <input type="text" value="${p.quantity}" disabled/>
-                                <a href="change?num=1&id=${p.getProduct().getProductID()}">+</a>
-                            </div>
+                        <div class="cart-item-name">
+                            <a style="
+                               text-decoration: none;
+                               color: sienna;
+                               font-size: 20px;
+                               font-style: oblique;
+                               margin: 50px;
+                               " 
+                               href="detail?model=${p.getProduct().getProductID()}">${p.getProduct().getProductName()}</a>
                         </div>
+                        <div class="cart-item-price">
+                            ${p.getProduct().getUnitPrice() * p.quantity}$
+                        </div>
+                        <div class="cart-item-button">
+                            <!--<form action="amount" method="post">-->
+                            <a href="remove?id=${p.getProduct().getProductID()}">Remove</a>
 
+                            <!--</form>-->
+                        </div>
                     </div>
-                </c:forEach>
-            </c:when>
+                    <div class="cart-item-function">
+                        <a href="change?num=-1&id=${p.getProduct().getProductID()}">-</a>  
+                        <input type="text" value="${p.quantity}" disabled/>
+                        <a href="change?num=1&id=${p.getProduct().getProductID()}">+</a>
+                    </div>
+                </div>
 
-        </c:choose>
+            </div>
+        </c:forEach>
         <div id="cart-summary">
             <div id="cart-summary-content">
                 <c:choose>
-                    <c:when test="${t != 0}">
+                    <c:when test="${t != 0 and sessionScope.cart != null and sessionScope.size != 0}">
                         Total amount: 
                         <span style="color:red">
                             <c:out value="${t}"/> $
                         </span>
                     </c:when>    
                     <c:otherwise>
-                        <h4 style="padding: 100px;">You need at least 1 product in your cart to order </h4>
+                        <img src="img/emptycart.png" alt="" class="img-fluid"/>
                     </c:otherwise>
                 </c:choose>
 
@@ -112,80 +69,42 @@
         </div>
         <form method="post" action="cart">
 
-            <c:choose >
-                <c:when test="${sessionScope.AccSession == null}">
-                    <div id="customer-info">
-                        <div id="customer-info-content">
-                            <h3>CUSTOMER INFORMATION:</h3>
-                            <div id="customer-info-detail">
-                                <div id="customer-info-left" >
-                                    <input type="text" placeholder="Company name *" name="txtCompanyName" required  /><br/>
-                                    <input type="text" placeholder="Contact name *" name="txtContactName" required /><br/>
-                                    Required Date<br/>
-                                    <input type="date" name="txtRequiredDate" value="<%=date%>" min="<%=date%>" max="2099-12-30" required />
-                                </div>
-                                <div id="customer-info-right">
-                                    <input type="text" placeholder="Contact title *" name="txtContactTitle" required /><br/>
-                                    <input type="text" placeholder="Address *" name="txtAddress"  required /><br/>
-                                </div>
-                            </div>
+            <c:set value="${sessionScope.CusSession}" var="cus"/>
+            <%--<c:out value="${cus.getCustomerID()}"/>--%> 
+            <div id="customer-info">
+                <div id="customer-info-content">
+                    <h3>CUSTOMER INFORMATION:</h3>
+                    <div id="customer-info-detail" >
+                        <div id="customer-info-left">
+                            <input type="text" placeholder="Company name *"  name="txtCompanyName" value="${cus.getCompanyName()} "  required/><br/>
+                            <input type="text" placeholder="Contact name *"  name="txtContactName"  value="${cus.getContactName()}" required/><br/>
+                            Required Date<br/>
+                            <input type="date" name="txtRequiredDate" value="<%=date%>" min="<%=date%>" max="2099-12-30" required />
+                        </div>
+                        <div id="customer-info-right">
+                            <input type="text" placeholder="Contact title *"  name="txtContactTitle"  value="${cus.getContactTitle()}" required/><br/>
+                            <input type="text" placeholder="Address *"  name="txtAddress"  value="${cus.getAddress()}" required/><br/>
                         </div>
                     </div>
-                    <div id="customer-info">
-                        <div id="customer-info-content">
-                            <h3>PAYMENT METHODS:</h3>
-                            <div id="customer-info-payment">
-                                <div>
-                                    <input type="radio" name="rbPaymentMethod" checked/>
-                                    Payment C.O.D - Payment on delivery 
-                                </div>
-                                <div>
-                                    <input type="radio" name="rbPaymentMethod" />
-                                    Payment via online payment gateway
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div id="customer-info">
+                <div id="customer-info-content">
+                    <h3>PAYMENT METHODS:</h3>
+                    <div id="customer-info-payment">
+                        <div>
+                            <input type="radio" name="rbPaymentMethod" checked/>
+                            Payment C.O.D - Payment on delivery
+                        </div>
+                        <div>
+                            <input type="radio" name="rbPaymentMethod" />
+                            Payment via online payment gateway
                         </div>
                     </div>
-                </c:when>
+                </div>
+            </div>
 
-                <c:when test="${sessionScope.AccSession != null}">
-                    <c:set value="${sessionScope.CusSession}" var="cus"/>
-                    <%--<c:out value="${cus.getCustomerID()}"/>--%> 
-                    <div id="customer-info">
-                        <div id="customer-info-content">
-                            <h3>CUSTOMER INFORMATION:</h3>
-                            <div id="customer-info-detail" >
-                                <div id="customer-info-left">
-                                    <input type="text" placeholder="Company name *" value="${cus.getCompanyName()} "  required/><br/>
-                                    <input type="text" placeholder="Contact name *" value="${cus.getContactName()}" required/><br/>
-                                    Required Date<br/>
-                                    <input type="date" name="txtRequiredDate" value="<%=date%>" min="<%=date%>" max="2099-12-30" required />
-                                </div>
-                                <div id="customer-info-right">
-                                    <input type="text" placeholder="Contact title *" value="${cus.getContactTitle()}" required/><br/>
-                                    <input type="text" placeholder="Address *" value="${cus.getAddress()}" required/><br/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="customer-info">
-                        <div id="customer-info-content">
-                            <h3>PAYMENT METHODS:</h3>
-                            <div id="customer-info-payment">
-                                <div>
-                                    <input type="radio" name="rbPaymentMethod" checked/>
-                                    Payment C.O.D - Payment on delivery
-                                </div>
-                                <div>
-                                    <input type="radio" name="rbPaymentMethod" />
-                                    Payment via online payment gateway
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:when>
 
-            </c:choose>
             <div id="cart-order">
                 <input class="type-sub" type="submit" value="ORDER"/>
             </div>

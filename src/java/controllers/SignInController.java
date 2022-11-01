@@ -5,12 +5,14 @@
 package controllers;
 
 import DAL.Account;
+import DAL.Customers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import models.AccountDAO;
+import models.CustomerDAO;
 
 /**
  *
@@ -44,17 +46,19 @@ public class SignInController extends HttpServlet {
             Account acc = dao.getAccount(email, pass);
             if (acc != null) {
                 //cap session
-                
+
                 req.getSession().setAttribute("AccSession", acc);
+                Customers cus = new CustomerDAO().getProfile(acc.getAccountID());
+                req.getSession().setAttribute("CusSession", cus);
                 //dieu huong toi index
-                if (acc.getRole()==2) {
+                if (acc.getRole() == 2) {
 //                    req.getSession().setAttribute("role", acc.getRole());
                     resp.sendRedirect(req.getContextPath() + "/category-list");
-                } else if(acc.getRole() == 1){
+                } else if (acc.getRole() == 1) {
 //                    req.getSession().setAttribute("role", acc.getRole());
                     resp.sendRedirect(req.getContextPath() + "/dashboard.jsp");
                 }
-                
+
             } else {
                 // else thi gui thong diep error ve doGet(login.jsps)
                 req.setAttribute("txtEmail", email);

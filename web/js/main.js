@@ -57,7 +57,7 @@ function showMess(id) {
 function deleteOrder(id) {
     var option = confirm('Do you want to delete order : ' + id + ' ? ');
     if (option === true) {
-        window.location.href = 'cancel?oid=' + id; 
+        window.location.href = 'cancel?oid=' + id;
     }
 
 
@@ -77,6 +77,15 @@ function addToCart(id) {
     if (option === true) {
         window.location.href = 'buy?id=' + id;
 
+    }
+}
+
+function show(o) {
+    console.log(o)
+    if (o.nextElementSibling.style.display === "flex") {
+        o.nextElementSibling.style.display = "none";
+    } else {
+        o.nextElementSibling.style.display = "flex";
     }
 }
 

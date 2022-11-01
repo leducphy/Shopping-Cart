@@ -20,7 +20,7 @@
             <div id="profile-content-order">
                 <c:forEach items="${listOrder}" var="o" >
                     <div>
-                        <div class="profile-order-title">
+                        <div class="profile-order-title" onclick="show(this)">
                             <div class="profile-order-title-left">
                                 <div>Order creation date: ${o.getOrderDate()}</div>
                                 <div>Order: <a href="#">#${o.getOrderID()}</a></div>
@@ -29,22 +29,22 @@
                                 <span>Pending</span>
                             </div>
                         </div>
+                        <div class="profile-order-content" style="display: none;">
 
-                        <c:forEach items="${listOrderDetail}" var="od">
-                            <c:if test="${o.getOrderID() == od.getOrderID()}" >
-                                <div class="profile-order-content">
+                            <c:forEach items="${listOrderDetail}" var="od">
+                                <c:if test="${o.getOrderID() == od.getOrderID()}" >
                                     <div class="profile-order-content-col1">
                                         <a href="detail.html"><img src="img/6.jpg" width="100%"/></a>
                                     </div>
                                     <div class="profile-order-content-col2 " style="">${od.getProductName()}</div>
                                     <div class="profile-order-content-col3">Quantity: ${od.getQuantity()}</div>
                                     <div class="profile-order-content-col4">${od.getUnitPrice()} $</div>
-                                </div>
-                            </c:if>
-                        </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                        </div>
                     </div>
                 </c:forEach>
-                
+
             </div>
         </div>
     </div>

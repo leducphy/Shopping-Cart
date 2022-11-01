@@ -3,6 +3,7 @@
     padding: 0px;
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-box: box-sizing;
 }
 #container{
     width: 80%;
@@ -611,7 +612,7 @@
     background-color: #fff;
 }
 .profile-order-title{
-    padding: 10px;
+    /*padding: 10px;*/
     border: 1px solid gainsboro;
     width: 97.5%;
     height: 50px;
@@ -635,6 +636,7 @@
     display: flex;
     border-bottom: 1px solid gainsboro;
     margin: 20px;
+    flex-wrap: wrap;
 }
 
 .profile-order-content-col1{
