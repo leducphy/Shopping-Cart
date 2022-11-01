@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import DAL.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +24,13 @@ public class CancelOrderAdminController extends HttpServlet {
         req.setAttribute("oid", oid);
         OrderDAO dao = new OrderDAO();
         dao.cancelOrderByID(oid);
-        resp.sendRedirect(req.getContextPath() + "/OrderManage");
+        Account acc = (Account) req.getSession().getAttribute("AccSession");
+        if (acc.getRole() == 1) {
+            resp.sendRedirect(req.getContextPath() + "/OrderManage");
+        }
+        else{
+             resp.sendRedirect(req.getContextPath() + "/order-detail");
+        }
     }
 
 }

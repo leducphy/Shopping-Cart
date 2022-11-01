@@ -84,6 +84,10 @@
         <servlet-name>CancelOrderAdmin</servlet-name>
         <servlet-class>controllers.CancelOrderAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelOrderUser</servlet-name>
+        <servlet-class>controllers.CancelOrderUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/product-list</url-pattern>
@@ -164,6 +168,10 @@
     <servlet-mapping>
         <servlet-name>CancelOrderAdmin</servlet-name>
         <url-pattern>/cancel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderUser</servlet-name>
+        <url-pattern>/CanceledOrderUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

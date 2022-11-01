@@ -4,6 +4,8 @@
  */
 package DAL;
 
+import models.ProductDAO;
+
 /**
  *
  * @author leducphi
@@ -66,6 +68,11 @@ public class OrderDetails {
     public void setDiscount(int Discount) {
         this.Discount = Discount;
     }
+    
+       public String getProductName(){
+        return new ProductDAO().getProductByID(ProductID).getProductName();
+    }
+    
 
     @Override
     public String toString() {

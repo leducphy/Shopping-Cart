@@ -17,38 +17,22 @@
         </ul>
     </div>
     <div id="content-right">
-        <div class="path">LIST ORDERS</b></div>
+        <div class="path">LIST ORDERS CANCELED</b></div>
         <div class="content-main">
             <div id="profile-content-order">
                 <div>
                     <c:forEach items="${listOrder}" var="o">
-                        <c:if test="${o.getRequiredDate() != null}">
-                            <div class="profile-order-title" onclick="show(this)">              
+                        <c:if test="${o.getRequiredDate() == null}">
+                            <div class="profile-order-title"  onclick="show(this)">              
                                 <div class="profile-order-title-left">                            
                                     <div>Order creation date: ${o.getOrderDate()}</div>                          
                                     <div>Order: <a style="text-decoration: none" href="#">#${o.getOrderID()}</a></div>
                                 </div>
-                                <div class="profile-order-title-right">
-
-                                    <c:choose>
-                                        <c:when test="${o.getShippedDate() != null}">
-                                            <span style="color: green;">
-                                                Completed
-                                            </span>
-                                        </c:when>
-
-                                        <c:when test="${o.getShippedDate() == null}">
-                                            <span style="color: blue ">
-                                                Pending | <a onclick="deleteOrder(${o.getOrderID()})">Cancel</a>                                 
-                                            </span>
-                                        </c:when>
-                                    </c:choose>
-
-
+                                <div class="profile-order-title-right">                               
+                                    <span<td style="color: red !important;">Order canceled </span>
                                 </div>
 
                             </div>
-
                             <div class="profile-order-content" style="display: none;">
                                 <c:forEach items="${listOrderDetail}" var="od">
                                     <c:if test="${o.getOrderID() == od.getOrderID()}" >
@@ -57,12 +41,13 @@
                                         </div>   
                                         <div class="profile-order-content-col2">${od.getProductName()}</div>
                                         <div class="profile-order-content-col3">Quantity : ${od.getQuantity()}</div>
-                                        <div style="color:saddlebrown;" class="profile-order-content-col4">${od.getUnitPrice()}$</div>
+                                        <div style="color:saddlebrown" class="profile-order-content-col4">${od.getUnitPrice()}$</div>
                                     </c:if>
                                 </c:forEach>
                             </div>
                         </c:if>
                     </c:forEach>
+
                 </div>
 
             </div>

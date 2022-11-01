@@ -12,7 +12,7 @@
                 <h3>My order</h3>
                 <ul>
                     <a href="<%=path%>/order-detail"><li>All orders</li></a>
-                    <a href="#"><li>Canceled order</li></a>
+                    <a href="<%=path%>/CanceledOrderUser"><li>Canceled order</li></a>
                 </ul>
             </div>
             <div id="content-right">
