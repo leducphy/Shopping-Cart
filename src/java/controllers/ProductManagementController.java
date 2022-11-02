@@ -23,7 +23,6 @@ public class ProductManagementController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         try {
             int page = 0;
             try {
@@ -45,6 +44,10 @@ public class ProductManagementController extends HttpServlet {
             req.setAttribute("products", products);
             req.setAttribute("page", page);
             req.setAttribute("numberOfPage", numberOfPage);
+            
+            // cattegory = 0 mean search in all
+            req.setAttribute("CatID", 0);
+
             req.getRequestDispatcher("product.jsp").forward(req, resp);
         } catch (ServletException | IOException e) {
         }

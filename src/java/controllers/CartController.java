@@ -46,26 +46,18 @@ public class CartController extends HttpServlet {
         try {
 
             ProductDAO pD = new ProductDAO();
-            //ArrayList<Product> listP = pD.getProductsByID(id);
             Product p = pD.getProductByID(id);
             Item i = new Item(p, 1, p.getUnitPrice());
             cart.addItem(i);
-
-            //req.getSession().setAttribute("list", listP);
             List<Item> list = cart.getItems();
             req.getSession().setAttribute("cart", cart);
             req.getSession().setAttribute("t", cart.getTotalMoney());
-
-            //req.getRequestDispatcher("cart.jsp").forward(req, resp);
             req.getSession().setAttribute("size", list.size());
-//            req.getRequestDispatcher("cart.jsp").forward(req, resp);
-
             if (!buy) {
                 resp.sendRedirect("detail?model=" + id);
             } else {
                 req.getRequestDispatcher("cart.jsp").forward(req, resp);
             }
-
         } catch (ServletException | IOException e) {
         }
 

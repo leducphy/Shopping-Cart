@@ -11,18 +11,20 @@
             <div id="product-title-header">
                 <div id="product-title-1" style="width: 25%;">
                     <b>Filter by Category:</b>
-                    <form action="SearchAdmin" method="get">
-                        <select name="ddlCategory">
+                    <form action="SearchAdmin" method="post">
+                        <select name="ddlCategory" class="selectCat">
+                            <option value="0">All</option>
                             <c:forEach items="${categories}" var="item">
-                                <option value="${item.getCategoryID()}">${item.getCategoryName()}</option>
+                                <option value="${item.getCategoryID()}" ${CatID == item.getCategoryID() ? "selected" : ""}>${item.getCategoryName()}</option>
                             </c:forEach>
                         </select>
                         <input type="submit" value="Filter" class="btn btn-outline-success search-btn">
                     </form>
                 </div>
                 <div id="product-title-2" style="width: 55%;" class="container-fluid">
-                    <form action="SearchAdmin" method="post" class="d-flex">
+                    <form action="SearchAdmin" method="get" class="d-flex">
                         <input  class="form-control me-2"type="text" name="txtSearch" placeholder="Enter product name to search" value="${nameSearch}"/>
+                        <input type="hidden" name="CatID" value="${CatID}">
                         <input class="btn btn-outline-success search-btn" type="submit" value="Search"/>
                     </form>
                 </div>
