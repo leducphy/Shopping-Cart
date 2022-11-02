@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -86,6 +87,18 @@ public class AccountDAO extends DBContext {
         } catch (SQLException e) {
         }
         return accounts;
+    }
+
+    public String randomString(int length) {
+        Random random = new Random();
+        String setOfCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String ab = "";
+        String abc = "";
+        for (int i = 0; i < length; i++) {
+            ab = Character.toString(setOfCharacters.charAt(random.nextInt(setOfCharacters.length())));
+            abc += ab;
+        }
+        return abc;
     }
 
 //    public static void main(String[] args) {

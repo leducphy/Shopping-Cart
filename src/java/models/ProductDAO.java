@@ -293,6 +293,30 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
+    
+        public ArrayList<Product> searchProductNameAndCatID(String name, int CatID) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM dbo.Products WHERE ProductName LIKE '%" + name + "%'" + "and CategoryID = " + CatID;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                p.setQuantityPerUnit(rs.getString("QuantityPerUnit"));
+                p.setUnitPrice(rs.getDouble("UnitPrice"));
+                p.setUnitsInStock(rs.getInt("UnitsInStock"));
+                p.setUnitsOnOrder(rs.getInt("UnitsOnOrder"));
+                p.setReorderLevel(rs.getInt("ReorderLevel"));
+                p.setDiscontinued(rs.getBoolean("Discontinued"));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return products;
+    }
 
     public void DeleteProduct(int id) {
         String sql = "DELETE FROM dbo.[Order Details] WHERE ProductID = ?\n"
@@ -388,7 +412,10 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-
-        System.out.println(dao.getProductByID(2));
+        
+        ArrayList<Product> li = dao.searchProductNameAndCatID("a", 3);
+        for (Product x : li) {
+            System.out.println(x);
+        }
     }
 }

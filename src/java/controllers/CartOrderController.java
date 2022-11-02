@@ -34,8 +34,12 @@ public class CartOrderController extends HttpServlet {
 
         Cart cart = null;
         Object o = req.getSession().getAttribute("cart");
-        dao.updateProfile("GUEST", CompanyName, ContactName, ContactTitle, Address);
-        Customers guest = dao.getCustomersByID("GUEST");
+
+//        dao.updateProfile("GUEST", CompanyName, ContactName, ContactTitle, Address);
+//        Customers guest = dao.getCustomersByID("GUEST");
+        String guestID = new AccountDAO().randomString(5);
+        new CustomerDAO().addCustomer(guestID, CompanyName, ContactName, ContactTitle, Address);
+        Customers guest = new CustomerDAO().getCustomersByID(guestID);
         if (o != null) {
             cart = (Cart) o;
         } else {
@@ -61,7 +65,7 @@ public class CartOrderController extends HttpServlet {
             }
 
         } else {
-            
+
             if (req.getSession().getAttribute("cart") == null) {
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Ban can it nhat 1 san phan trong gio hang de co the dat hang');");

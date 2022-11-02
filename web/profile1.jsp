@@ -49,7 +49,7 @@
 
                             </div>
 
-                            <div class="profile-order-content" style="display: none;">
+                                    <div class="profile-order-content" <c:if test="${listOrder.indexOf(o) ne 0}">style="display: none;"</c:if>>
                                 <c:forEach items="${listOrderDetail}" var="od">
                                     <c:if test="${o.getOrderID() == od.getOrderID()}" >
                                         <div class="profile-order-content-col1">

@@ -81,6 +81,25 @@ public class CustomerDAO extends DBContext {
             System.err.println(e);
         }
     }
+    
+        public void addCustomer(String CusID, String CompanyName, String ContactName, String ContactTitle, String Address) {
+        try {
+            String sql = "INSERT INTO Customers"
+                    + "  (CustomerID, CompanyName, ContactName, ContactTitle, Address) VALUES "
+                    + " (?, ?, ?, ?, ?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, CusID);
+            ps.setString(2, CompanyName);
+            ps.setString(3, ContactName);
+            ps.setString(4, ContactTitle);
+            ps.setString(5, Address);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
 
     public static void main(String[] args) {
         new CustomerDAO().updateProfile("GUEST", "12g", "g", "x", "x");
