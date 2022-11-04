@@ -9,8 +9,10 @@
         <h3>CATEGORY</h3>
         <ul>
             <c:forEach items="${categoryList}" var="item">
-                <a class="category-item" href="product-list?category-id=${item.getCategoryID()}"><li>${item.getCategoryName()}</li></a>      
-                    </c:forEach>
+                <a class="category-item" href="product-list?category-id=${item.getCategoryID()}">
+                    <li>${item.getCategoryName()}</li>
+                </a>      
+            </c:forEach>
         </ul>
     </div>
     <div id="content-right">
@@ -22,13 +24,27 @@
                     <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
+
+                    <c:choose>
+                        <c:when test="${p.getUnitsInStock() == 0}">
+                            <div class="col d-flex justify-content-center">
+                                <a href="" class="btn btn-primary buynow" style= "background-color: red;" >Out of stock</a>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="col d-flex justify-content-center">
+                                <a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </c:forEach>
 
             <!--PAGING-->
             <c:set var = "catID" scope = "application" value = "${categoryID}"></c:set>
-            <nav aria-label="Page navigation example" style="width: 95%;">
+                <nav aria-label="Page navigation example" style="width: 95%;">
                 <c:if test="${numberOfPage > 1}">
                     <ul class="pagination justify-content-end">
                         <c:if test="${page != 1}">

@@ -18,13 +18,25 @@
     <div id="content-right">
         <div class="path">All Product</b></div>      
         <div class="content-main">
-            
+
             <c:forEach items="${products}" var="p">
                 <div class="product card-body">
                     <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
+                    <c:choose>
+                        <c:when test="${p.getUnitsInStock() == 0}">
+                            <div class="col d-flex justify-content-center">
+                                <a href="" class="btn btn-primary buynow" style= "background-color: red;" >Out of stock</a>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="col d-flex justify-content-center">
+                                <a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </c:forEach>
 
@@ -76,7 +88,19 @@
                     <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
+                    <c:choose>
+                        <c:when test="${p.getUnitsInStock() == 0}">
+                            <div class="col d-flex justify-content-center">
+                                <a href="" class="btn btn-primary buynow" style= "background-color: red;" >Out of stock</a>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="col d-flex justify-content-center">
+                                <a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </c:forEach>
         </div>
@@ -87,7 +111,19 @@
                     <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
+                    <c:choose>
+                        <c:when test="${p.getUnitsInStock() == 0}">
+                            <div class="col d-flex justify-content-center">
+                                <a href="" class="btn btn-primary buynow" style= "background-color: red;" >Out of stock</a>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="col d-flex justify-content-center">
+                                <a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </c:forEach>
         </div>
@@ -98,7 +134,19 @@
                     <a href="detail?model=${p.getProductID()}"><img src="img/4.jpg" width="100%"/></a>
                     <div class="name card-title"><a href="detail?model=${p.getProductID()}">${p.getProductName()}</a></div>
                     <div class="price">Price: ${p.getUnitPrice()}</div>
-                    <div class="col d-flex justify-content-center"><a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a></div>
+                    <c:choose>
+                        <c:when test="${p.getUnitsInStock() == 0}">
+                            <div class="col d-flex justify-content-center">
+                                <a href="" class="btn btn-primary buynow" style= "background-color: red;" >Out of stock</a>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="col d-flex justify-content-center">
+                                <a href="buy?id=${p.getProductID()}&buy=true" class="btn btn-primary buynow" >Buy now</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </c:forEach>
         </div>

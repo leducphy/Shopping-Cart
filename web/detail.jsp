@@ -78,8 +78,8 @@
                                     </div>
                                     <div id="product-detail-buttons">
                                         <div id="product-detail-button">
-                                            <input onclick="buynow(${pid})" type="button" value="BY NOW" disabled>
-                                            <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;" disabled>
+<!--                                            <input onclick="buynow(${pid})" type="button" value="BY NOW" disabled>
+                                            <input onclick="addToCart(${pid})" type="button" value="ADD TO CART" style="background-color: #fff; color:red;border: 1px solid gray;" disabled>-->
                                         </div>
                                     </div>
                                 </c:otherwise>
