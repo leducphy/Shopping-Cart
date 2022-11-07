@@ -10,7 +10,7 @@
         <ul>
             <c:forEach items="${categoryList}" var="item">
                 <a class="category-item" href="product-list?category-id=${item.getCategoryID()}">
-                    <li>${item.getCategoryName()}</li>
+                    <li <c:if test="${categoryID eq item.getCategoryID() }"> style="background-color: sienna;color: white;"</c:if> >${item.getCategoryName()}</li>
                 </a>      
             </c:forEach>
         </ul>

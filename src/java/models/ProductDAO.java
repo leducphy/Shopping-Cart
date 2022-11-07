@@ -79,9 +79,9 @@ public class ProductDAO extends DBContext {
         try {
             String sql = "SELECT TOP 4\n"
                     + "       *\n"
-                    + "FROM dbo.[Order Details] o,\n"
-                    + "     dbo.Products p\n"
-                    + "WHERE o.ProductID = p.ProductID\n"
+                    + "FROM [Order Details] od\n"
+                    + "    INNER JOIN Products p\n"
+                    + "        ON p.ProductID = od.ProductID\n"
                     + "ORDER BY Discount DESC;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -108,10 +108,10 @@ public class ProductDAO extends DBContext {
         try {
             String sql = "SELECT TOP 4\n"
                     + "       *\n"
-                    + "FROM dbo.[Order Details] o,\n"
-                    + "     dbo.Products p\n"
-                    + "WHERE o.ProductID = p.ProductID\n"
-                    + "ORDER BY Discount ASC;";
+                    + "FROM [Order Details] od\n"
+                    + "    INNER JOIN Products p\n"
+                    + "        ON p.ProductID = od.ProductID\n"
+                    + "ORDER BY UnitsOnOrder DESC;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -137,10 +137,8 @@ public class ProductDAO extends DBContext {
         try {
             String sql = "SELECT TOP 4\n"
                     + "       *\n"
-                    + "FROM dbo.Products p,\n"
-                    + "     dbo.[Order Details] o\n"
-                    + "WHERE p.ProductID = o.ProductID\n"
-                    + "ORDER BY p.UnitsInStock DESC;";
+                    + "FROM Products\n"
+                    + "ORDER BY ProductID DESC;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -293,8 +291,8 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
-    
-        public ArrayList<Product> searchProductNameAndCatID(String name, int CatID) {
+
+    public ArrayList<Product> searchProductNameAndCatID(String name, int CatID) {
         ArrayList<Product> products = new ArrayList<>();
         try {
             String sql = "SELECT * FROM dbo.Products WHERE ProductName LIKE '%" + name + "%'" + "and CategoryID = " + CatID;
@@ -412,7 +410,7 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
+
         ArrayList<Product> li = dao.searchProductNameAndCatID("a", 3);
         for (Product x : li) {
             System.out.println(x);

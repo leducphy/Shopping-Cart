@@ -45,8 +45,7 @@ public class CartActionController extends HttpServlet {
             if ((num == -1) && (sc.getQuantityByID(id) <= 1)) {
                 sc.removeItem(id);
             } else {
-                ProductDAO pD = new ProductDAO();
-                Product p = pD.getProductByID(id);
+                Product p = new ProductDAO().getProductByID(id);
                 Item t = new Item(p, num, p.getUnitPrice());
                 sc.addItem(t);
             }
