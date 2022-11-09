@@ -25,7 +25,6 @@ public class SearchProductController extends HttpServlet {
         ArrayList<Product> products = new ProductDAO().searchProductName(name);
         req.setAttribute("products", products);
         req.setAttribute("nameSearch", name);
-
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 

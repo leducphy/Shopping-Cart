@@ -43,6 +43,8 @@ public class ProductListController extends HttpServlet {
             }
         }
 
+        
+        //pagging
         int page = 0;
         try {
             page = Integer.parseInt(req.getParameter("page"));
@@ -63,6 +65,9 @@ public class ProductListController extends HttpServlet {
         req.setAttribute("products", products);
         req.setAttribute("page", page);
         req.setAttribute("numberOfPage", numberOfPage);
+        //pagging
+        
+        
         req.setAttribute("categoryList", categoryList);
         req.setAttribute("categoryID", categoryID);
         req.setAttribute("cateDesc", categoryDescription);
